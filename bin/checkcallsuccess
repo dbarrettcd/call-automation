@@ -1,0 +1,126 @@
+#!/bin/bash
+# Written by: Brian Hom
+# Contributions by: David Barrett, Stephen Muth
+
+usage() {
+cat << EOF
+Usage:
+    $0 [OPTIONS]
+
+Example:
+    $0 -c 12345 -e qa4 -s fs14
+
+OPTIONS:
+    -c      Define the call id to look up (> 0)
+    -e      Define the environment to test against (i.e.: qa5)
+    -f      Define the file where the checks are stored
+                * Plain-text file separated by new lines
+    -s      Define the feature server to run on (fs14, fs18 -- Default)
+EOF
+
+    exit 1
+}
+
+IFS="|"
+
+# Formatting vars
+Color_Off='\033[0m'
+BRed='\e[1;31m'
+BGreen='\e[1;32m'
+BYellow='\e[1;33m'
+MESSAGE_LENGTH=50
+
+error=false
+
+CALL_ID=-1
+ENV=$(hostname)
+FEATURE_SERVER=fs18
+LOG_PATH="/var/log/asterisk/full"
+
+while getopts c:e:f:s: OPTION ; do
+    case $OPTION in
+        c) export CALL_ID=$OPTARG;;
+        e) ENV=$OPTARG;;
+        f) CHECKS_FILE=$OPTARG;;
+        s) FEATURE_SERVER=$OPTARG;;
+        ?) usage;;
+    esac
+done
+
+if (( $CALL_ID < 1 )) ; then
+    echo -e "${BRed}ERROR: Please define a call id greater than 0.${Color_Off}"
+    error=true
+fi
+
+if [[ $ENV == "" ]] || [[ -z $ENV ]] ; then
+    echo -e "${BRed}ERROR: Please provide an environment to check.${Color_Off}"
+    error=true
+fi
+
+if [[ -z $CHECKS_FILE ]] ; then
+    echo -e "${BRed}ERROR: Please provide a file.${Color_Off}"
+    error=true
+fi
+
+if $error ; then
+    usage
+fi
+
+# Dynamically add periods to the end of the messages for clean formatting
+for ((i = 0; i < ${#MESSAGES[@]}; i++)) ; do
+    while ((${#MESSAGES[i]} < ${MESSAGE_LENGTH})) ; do
+        MESSAGES[$i]="${MESSAGES[i]}."
+    done
+done
+
+HOSTNAME="${ENV}-${FEATURE_SERVER}.dev.coredial.com"
+echo "Checking call id '${CALL_ID}' on '${HOSTNAME}' at '${LOG_PATH}'"
+
+ssh -q $HOSTNAME << EOF
+    # (# Auto Attendant
+    #                'Received inbound PSTN'
+    #                'Do ODBC lookup'
+    #                'We have an incoming PSTN'
+    #                'Macro va_voicemail called'
+    #                # Extensions
+    #                'Sending call to routeTo macro of'
+    #                'Executing extension'
+    #                'User extension logic for')
+
+    # # Auto Attendant
+    #           'Checking inbound PSTN'
+    #           'Checking ODBC lookup'
+    #           'Checking incoming PSTN'
+    #           'Checking va_voicemail called'
+    #           # Extensions
+    #           'Checking call sent to routeTo macro'
+    #           'Checking extension execution'
+    #           'Checking user extension logic')
+
+    if [[ ! -f $CHECKS_FILE ]] ; then
+        echo -e "${BRed}ERROR: ${CHECKS_FILE} is an invalid file.${Color_Off}"
+        exit -1
+    fi
+
+    if [[ ! -f ${LOG_PATH} ]] ; then
+        echo -e "${BRed}ERROR: '${LOG_PATH}' could not be found. Exiting.${Color_Off}"
+        exit -1
+    fi
+
+    # ONE grep TO RULE THEM ALL!
+    CALL_LOG="\$(grep "${CALL_ID}" ${LOG_PATH} 2>/dev/null | grep 'app_verbose.c')"
+
+    # for ((i = 0; i < \${#RULES[@]}; i++)) ; do
+    while read rule ; do
+        echo rule
+        echo -ne "${BYellow}\${MESSAGES[i]}${Color_Off}"
+        
+        OUTPUT="\$(echo "\${CALL_LOG}" | grep "\${RULES[i]}" 2>/dev/null)"
+        if [[ -n "\$OUTPUT" ]] ; then
+            echo -e '${BGreen}PASS${Color_Off}'
+            echo "\${OUTPUT}"
+        else
+            echo -e '${BRed}FAIL${Color_Off}'
+        fi
+    done <${CHECKS_FILE}
+EOF

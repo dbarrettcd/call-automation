@@ -18,7 +18,6 @@
      ]]>
    </send>
    
-
    <recv response="100" optional="true">
    </recv>
 
@@ -177,7 +176,13 @@
      ]]>
    </send>
    
-   <pause milliseconds="50000"/>
+   <pause milliseconds="51000"/>
+   
+   <nop>
+     <action>
+       <exec command="../bin/findcallinasterisk vagrant@[remote_ip] ../ssh/vagrant_key /var/log/asterisk/full > call_number.txt"/>
+     </action>
+   </nop>
   
    <nop>
      <action>

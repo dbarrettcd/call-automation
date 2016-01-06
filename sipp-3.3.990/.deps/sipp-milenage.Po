@@ -1,0 +1,5 @@
+sipp-milenage.o: src/milenage.c include/milenage.h include/rijndael.h
+
+include/milenage.h:
+
+include/rijndael.h:

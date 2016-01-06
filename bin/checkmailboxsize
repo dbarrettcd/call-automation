@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+#ssh into the asterisk server and returns the size of the requested mailbox in bytes
+if [ $# -ne 4 ]; then 
+   echo -e "checkmailboxsize error: invalid argument(s) \nusage: \
+   checkmailboxsize user@server ssh_key_location context mailbox_number \ne.g. \
+   checkmailboxsize vagrant@qa4-fs18.dev.coredial.com ../ssh/vagrant_key srei 999"
+   exit 1
+fi
+CMD='du -b /var/spool/asterisk/voicemail/"'$3'"/"'$4'"/INBOX | cut -f 1'
+ssh -q -i $2 $1 $CMD
+

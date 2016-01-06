@@ -1,0 +1,51 @@
+#!/bin/bash
+
+usage() {
+cat << EOF
+Usage:
+    $0 [OPTIONS]
+
+OPTIONS:
+    -c      Define the call id to look up (> 0)
+    -e      Define the environment to test against (i.e.: qa5)
+    -s      Define the feature server to run on (fs14, fs18)
+EOF
+}
+
+ENV=qa5
+FEATURE_SERVER=fs18
+CALL_ID=-1
+
+while getopts e:s:c: OPTION ; do
+    case $OPTION in
+        e) ENV=$OPTARG;;
+        s) FEATURE_SERVER=$OPTARG;;
+        c) CALL_ID=$OPTARG;;
+        ?)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if (( $CALL_ID < 1 )) ; then
+    echo "ERROR: Please define a call id greater than 0."
+    echo ""
+    usage
+    exit 1
+fi
+
+URL="${ENV}-${FEATURE_SERVER}.dev.coredial.com"
+
+GREP_CALL_ID_LOG="grep ${CALL_ID} /var/log/asterisk/full"
+GREP_APP_VERBOSE="grep app_verbose.c"
+
+if $GREP_CALL_ID_LOG | $GREP_APP_VERBOSE | grep "Received inbound PSTN" &&
+   $GREP_CALL_ID_LOG | $GREP_APP_VERBOSE | grep "Do ODBC lookup" &&
+   $GREP_CALL_ID_LOG | $GREP_APP_VERBOSE | grep "We have an incoming PSTN" &&
+   $GREP_CALL_ID_LOG | $GREP_APP_VERBOSE | grep "Macro va_voicemail called" ; then
+    echo "Call Successful"
+    exit 1
+else
+    echo "Call unsuccessful"
+fi

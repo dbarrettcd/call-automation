@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
+#parameters: user@server ssh_key_location asterisk_log_file 
 #ssh into the asterisk server and returns the call ID of the most recent call
 if [ $# -ne 3 ]; then 
-   echo -e "findcallinasterisk error: invalid argument(s) \nusage: \
-   findcallinasterisk user@server ssh_key_location asterisk_log_file \ne.g. \
-   findcallinasterisk vagrant@qa4-fs18.dev.coredial.com ../ssh/vagrant_key /var/log/asterisk/full"
+   echo -e "findcallinasterisk error: invalid argument(s) \nusage: findcallinasterisk user@server ssh_key_location asterisk_log_file \ne.g. findcallinasterisk vagrant@qa4-fs18.dev.coredial.com ../ssh/vagrant_key /var/log/asterisk/full"
    exit 1
 fi
 

@@ -2,9 +2,9 @@
 # Written by: Brian "grep whisperer" Hom
 
 import csv
-import subprocess
 import sys
-import xml
+import mmap
+import os.path
 
 # Formatting vars
 COLOR_OFF = "\033[0m"
@@ -17,7 +17,7 @@ MESSAGE_LENGTH = 100
 
 def usage():
     print("""Usage:
-    {0} <log_file> <assert_file(s)>""".format(sys.argv[0]))
+    {0} <log_file> <assert_file> <base_log_file>""".format(sys.argv[0]))
 
 def append_trail(string, string_length, trail_character='.'):
     """Add a trail to the end of the provided string up to the defined length.
@@ -56,29 +56,56 @@ def get_pass_fail_message(has_passed):
             "FAIL"
         )
 
-def is_string_in_file(inputString, file):
-    """Uses grep to search through the specified file for the list of strings.
-
+def is_string_in_file(string, file_path):
+    """Searches a file if the provided string exists.
+    
     Keyword arguments:
-    inputString -- string -- A string to check for in the provided file
-    file -- string -- The file to check against
-
-    Returns: boolean
-    """
-
-    if len(inputString) < 1:
-        return False
-   
+    string -- string -- The phrase to search for
+    file -- string -- The file to check
+    
+    Returns: boolean"""
+     
     try:
-        # grep will throw an exception(return 1) if the string isn't found
-        subprocess.check_output("grep " + '"' + inputString + '"' + " "  + file, shell=True)
-        output = True
-    except subprocess.CalledProcessError as e:
-        output = False
-
-    return output
-
-
+        with open(file_path) as file:
+            # Using mmap offers better memory performance
+            #   especially for large files compared to using something like
+            #   if string in open(file_path).read()
+            s = mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ)
+            
+            # string must be converted to a bytes object
+            #   for it to be usable with the mmap object
+            bytes_string = bytes(string)
+            
+            result = s.find(bytes_string) != -1
+            
+            return result
+            
+    except IOError as e:
+        # File(s) could not be opened
+        print("Operation failed: {0}{2}{1}".format(B_RED, COLOR_OFF, e))
+        exit(1)
+        
+def count_lines_in_file(file_path):
+    """Check the number of lines in a file
+    
+    Keyword arguments:
+    file_path -- string -- The path to the log file
+    
+    Returns: int"""
+    try:
+        f = open(file_path, "r+")
+        buf = mmap.mmap(f.fileno(), 0)
+        lines = 0
+        readline = buf.readline
+        while readline():
+            lines += 1
+        return lines
+        
+    except IOError as e:
+        # File(s) could not be opened
+        print("Operation failed: {0}{2}{1}".format(B_RED, COLOR_OFF, e))
+        exit(1)
+    
 def assert_test(log_file_path, assert_file_path):
     """Checks the provided log file
     to see if it contains the strings provided in the assert file
@@ -103,7 +130,7 @@ def assert_test(log_file_path, assert_file_path):
 
             # Check each test type
             for row in asserts:
-                print("{0}Checking {2!r}{1}".format(
+                print("{0}Checking '{2}'{1}".format(
                     UB_YELLOW,
                     COLOR_OFF,
                     row[0]
@@ -113,7 +140,7 @@ def assert_test(log_file_path, assert_file_path):
                 # Skip the first entry
                 #   because it is just the call type for printing
                 for check in row[1:]:
-                    message = "Checking for {0!r}".format(check)
+                    message = "Checking for '{0}'".format(check)
                     message = append_trail(message, MESSAGE_LENGTH)
 
                     search_output = is_string_in_file(check, log_file_path)
@@ -124,23 +151,73 @@ def assert_test(log_file_path, assert_file_path):
                         message,
                         get_pass_fail_message(search_output)
                     ))
+                    
     except IOError as e:
         # File(s) could not be opened
         print("Operation failed: {0}{2}{1}".format(B_RED, COLOR_OFF, e))
-        exit(2)
+        exit(1)
+        
+def assert_logsize(log_file_path, base_log_file_path):
+    """Checks the provided log file to see if it contains the same number 
+    of lines as a known good log(base_log_file_path) 
 
+    Keyword arguments:
+    log_file_path -- string -- The path to the log file
+    base_log_file_path -- string -- The path to the base log file"""
+
+    log_lines = count_lines_in_file(log_file_path)
+    base_lines = count_lines_in_file(base_log_file_path)
+        
+    message = "Checking line count against base"
+    message = append_trail(message, MESSAGE_LENGTH)
+        
+    line_counts_equal = log_lines == base_lines
+    print("{0}{1}".format(
+        message,
+        get_pass_fail_message(line_counts_equal)
+    ))
+        
+def assert_negative_test(log_file_path):
+    """Checks the provided log file to see if it does NOT contain certain words 
+
+    Keyword arguments:
+    log_file_path -- string -- The path to the log file"""
+    
+    try:
+        bad_words = ["NOTICE","notice","WARNING","warning","ERROR","error","DEBUG","debug"]
+      
+        for word in bad_words:
+            message = "Verifying there are no '{0}' messages".format(word)
+            message = append_trail(message, MESSAGE_LENGTH)
+            search_output = is_string_in_file(word, log_file_path)
+            print("{0}{1}".format(
+                message,
+                get_pass_fail_message(not search_output)
+            ))
+
+    except IOError as e:
+        # File(s) could not be opened
+        print("Operation failed: {0}{2}{1}".format(B_RED, COLOR_OFF, e))
+        exit(1)
+        
 if __name__ == "__main__":
-    # Needs a log_file, and at least 1 assert_file
-    if len(sys.argv[1:]) < 2:
+    # Needs a log_file, an assertion file, and a base_log_file
+    if len(sys.argv[1:]) < 3:
         usage()
         exit(1)
 
     log_file_path = sys.argv[1]
     assert_file_path = sys.argv[2]
+    base_log_file_path = sys.argv[3]
 
     if (log_file_path == "" or
-        assert_file_path == ""):
+        assert_file_path == "" or
+        base_log_file_path == ""):
         usage()
         exit(1)
     assert_test(log_file_path, assert_file_path)
+    print(append_trail("", MESSAGE_LENGTH, '-'))
+    assert_logsize(log_file_path, base_log_file_path)
+    print(append_trail("", MESSAGE_LENGTH, '-'))
+    assert_negative_test(log_file_path)
     

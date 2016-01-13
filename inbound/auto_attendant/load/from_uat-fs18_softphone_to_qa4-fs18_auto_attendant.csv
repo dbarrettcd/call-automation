@@ -1,0 +1,5 @@
+SEQUENTIAL
+# field0 - SIP username for uat-fs18 SIP user
+# field1 - username and password for uat-fs18 SIP user
+# field2 - DID for QA4
+sip2999_srei;[authentication username=sip2999_srei password=5693d29da6b44];6178302175;

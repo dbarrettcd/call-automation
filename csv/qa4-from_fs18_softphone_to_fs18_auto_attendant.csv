@@ -1,6 +1,0 @@
-SEQUENTIAL
-# field0 - SIP username
-# field1 - username and password
-# field2 - DID for QA4
-sip299_srei;[authentication username=sip299_srei password=506ef97c637c5];6178302175;vagrant@qa4-fs18.dev.coredial.com;../ssh/vagrant_key;/var/log/asterisk/full;inbound_auto_attendant_voicemail1.txt
-

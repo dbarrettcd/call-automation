@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-#parameters: user@server ssh_key_location context mailbox_number
-#ssh into the asterisk server and returns the size of the requested mailbox in bytes
+#purpose: ssh into the asterisk server and returns the size of the requested mailbox in bytes
+#parameters: user@featureserver ssh_key_location context mailbox_number
+
 if [ $# -ne 4 ]; then 
    echo -e "checkmailboxsize error: invalid argument(s) \nusage: checkmailboxsize user@server ssh_key_location context mailbox_number \ne.g. checkmailboxsize vagrant@qa4-fs18.dev.coredial.com ../ssh/vagrant_key srei 999"
    exit 1

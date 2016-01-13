@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+#purpose: ssh into the asterisk server and truncate the asterisk log
+#parameters: user@feature server ssh_key_location asterisk_log_file 
+
+if [ $# -ne 3 ]; then 
+   echo -e "truncateremotefile error: invalid argument(s) \nusage: truncateremotefile user@server ssh_key_location file \ne.g. bin/truncateremotefile vagrant@qa4-fs18.dev.coredial.com ssh/vagrant_key /var/log/asterisk/full"
+   exit 1
+fi
+
+CMD='sudo cp /dev/null "'$3'"' 
+ssh -q -i $2 $1 $CMD 

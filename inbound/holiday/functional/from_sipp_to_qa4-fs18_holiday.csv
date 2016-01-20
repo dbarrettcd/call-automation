@@ -1,0 +1,8 @@
+SEQUENTIAL
+# field0 - DID for QA4
+# field1 - fs18 server credentials
+# field2 - ssh key for fs18
+# field3 - asterisk log
+# field4 - location of file output
+6178302175;vagrant@qa4-fs18.dev.coredial.com;ssh/vagrant_key;/var/log/asterisk/full;inbound/holiday/functional/inbound_holiday_voicemail_new.txt;
+

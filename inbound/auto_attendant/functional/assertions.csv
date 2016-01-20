@@ -1,0 +1,3 @@
+"Test Type","Assertion1","Assertion2","Assertion3","Assertion4"
+"Inbound from PSTN to Auto Attendant","Received inbound PSTN call from SBC gateway","Do ODBC lookup","We have an incoming PSTN","Macro va_voicemail called","Standard mailbox","Recording the message","User hung up"
+

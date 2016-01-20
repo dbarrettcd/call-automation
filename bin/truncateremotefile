@@ -8,5 +8,6 @@ if [ $# -ne 3 ]; then
    exit 1
 fi
 
-CMD='sudo cp /dev/null "'$3'"' 
-ssh -q -i $2 $1 $CMD 
+CMD='echo "" > "'$3'"' 
+ssh -q -i $2 $1 $CMD
+ 

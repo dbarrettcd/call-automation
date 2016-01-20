@@ -1,1 +1,0 @@
-sipp-rijndael.o: src/rijndael.c

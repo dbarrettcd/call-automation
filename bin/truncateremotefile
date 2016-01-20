@@ -8,6 +8,6 @@ if [ $# -ne 3 ]; then
    exit 1
 fi
 
-CMD='echo "" > "'$3'"' 
+CMD='echo -n "" | sudo tee "'$3'"' 
 ssh -q -i $2 $1 $CMD
  

@@ -18,7 +18,19 @@ Installing SIPp
 
    tar -xvzf sipp.tar.gz && cd sipp-3.3.990 && ./configure --with-pcap && make
 
-
+Running Load Tests
+------------------
+1. increase the number of CPUs that the Feature Server VM has
+  
+   on the box, edit the Vagrantfile - /home/<user>/chef-repo/resources/vagrant/environment/Vagrantfile  
+   under ### Feature server 1.8 ### 
+   change v.customize [ "modifyvm", :id, "--name", COMPONENTS[:fs18], "--memory", 512 ] 
+   to v.customize [ "modifyvm", :id, "--name", COMPONENTS[:fs18], "--memory", 512, "--cpus", 2 ]
+   
+   
+   vagrant reload fs18
+   
+     
 Inbound Auto Attendant
 ----------------------
 

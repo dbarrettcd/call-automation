@@ -3,14 +3,14 @@
 
 This SIPp scenario does an :
 - INVITE
-- wait 51 seconds for auto attendant to go to voicemail
-- plays a 10 second pcap file
+- wait 10 seconds
+- presses the 4 key
 - ends the call
 - runs the bin/findcallinasterisk program to get the call log for the call
 
 -->
 
-<scenario name="INVITE + PAUSE 51 seconds + RTP 10 seconds + HANGUP">  
+<scenario name="INVITE + PAUSE  seconds + RTP 10 seconds + HANGUP">  
    
    <!-- ************************************************************* -->
    <!-- send INVITE -->
@@ -92,8 +92,18 @@ This SIPp scenario does an :
      ]]>
    </send>
    
-   <pause milliseconds="51000" />
+   <pause milliseconds="13000" />
    
+   <!-- press 4 -->
+   <nop>
+     <action>
+       <exec play_pcap_audio="pcap/dtmf_2833_4.pcap"/>
+     </action>
+   </nop>
+
+   <pause milliseconds="18000"/>
+   
+   <!-- play 10 second audio -->
    <nop>
      <action>
        <exec play_pcap_audio="pcap/g711a.pcap"/>
@@ -101,7 +111,7 @@ This SIPp scenario does an :
    </nop>
 
    <pause milliseconds="10000"/>
-   
+      
    <send>
       <![CDATA[
 

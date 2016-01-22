@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!--
 
-This SIPp scenario does an :
+This SIPp scenario does a:
 - INVITE
-- wait 51 seconds for auto attendant to go to voicemail
-- plays a 10 second pcap file
+- sends a signal to simulate pressing the 4 key
+- plays a pcap file for 150 seconds
 - ends the call
-- runs the bin/findcallinasterisk program to get the call log for the call
 
 -->
 
-<scenario name="INVITE + PAUSE 51 seconds + RTP 10 seconds + HANGUP">  
+<scenario name="INVITE + HANGUP">
    
    <!-- ************************************************************* -->
    <!-- send INVITE -->
@@ -75,7 +74,7 @@ This SIPp scenario does an :
    <recv response="200">
    </recv>
    
-   <!-- ACK the RTP connection so asterisk does not boot us from the call -->
+    <!-- ACK the RTP connection so asterisk does not boot us from the call -->
    
    <send>
       <![CDATA[
@@ -92,15 +91,27 @@ This SIPp scenario does an :
      ]]>
    </send>
    
-   <pause milliseconds="51000" />
-   
+   <pause milliseconds="10000" />  
+    
+   <!-- Press 4-->
    <nop>
-     <action>
-       <exec play_pcap_audio="pcap/g711a.pcap"/>
-     </action>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_4.pcap"/>
+      </action>
    </nop>
 
-   <pause milliseconds="10000"/>
+   <pause milliseconds="1000"/>
+   
+   <pause milliseconds="20000" />
+
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/hey_ya.pcap"/>
+      </action>
+   </nop>   
+   
+   <pause milliseconds="160000" />
+   
    
    <send>
       <![CDATA[
@@ -119,16 +130,12 @@ This SIPp scenario does an :
 
    <!-- some asterisk servers send 200 for their BYE response, others send 487  -->
 
-   <recv response="487" optional="true">
+   <recv response="487" optional="true" next="2">
    </recv>
 
    <recv response="200" >
    </recv>
 
-   <nop>
-     <action>
-       <exec command="bin/findcallinasterisk [field1] [field2] [field3] > [field4]" />
-     </action>
-   </nop>
+   <label id="2"/>
 
 </scenario>

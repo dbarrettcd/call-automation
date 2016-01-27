@@ -19,19 +19,19 @@ def usage():
     print("""Usage:
     {0} <log_file> <assert_file> <base_log_file>""".format(sys.argv[0]))
 
-def append_trail_to_string(string, trail_character='.', string_length=100):
+def append_trail_to_string(string, trail_string='.', string_length=100):
     """Add a trail to the end of the provided string up to the defined length.
 
     Keyword arguments:
     string -- string -- The string to have a trail appended to it
-    trail_character -- string -- The character to append to the string
+    trail_string -- string -- The characters to append to the string
     string_length -- int -- The number of characters the string should contain.
         It will equate to (orig_string + trail) == string_length
 
     Returns: string"""
 
     while len(string) < string_length:
-        string += trail_character
+        string = "".join([string, trail_string])
 
     return string
 
@@ -43,25 +43,26 @@ def get_pass_fail_message(has_passed):
 
     Returns: string"""
 
+    status_message = ""
+    output_color = ""
+
     if has_passed:
-        return "{0}{2}{1}".format(
-            B_GREEN,
-            COLOR_OFF,
-            "PASS"
-        )
+        output_color = B_GREEN
+        status_message = "PASS"
     else:
-        return "{0}{2}{1}".format(
-            B_RED,
-            COLOR_OFF,
-            "FAIL"
-        )
+        output_color = B_RED
+        status_message = "FAIL"
+
+    formatted_message = "".join([output_color, status_message, COLOR_OFF])
+
+    return formatted_message
 
 def is_string_in_file(string, file_path):
     """Searches a file if the provided string exists.
     
     Keyword arguments:
     string -- string -- The phrase to search for
-    file -- string -- The file to check
+    file_path -- string -- The file to check
 
     Returns: boolean"""
 
@@ -107,13 +108,15 @@ def count_lines_in_file(file_path):
         print("Operation failed: {0}{2}{1}".format(B_RED, COLOR_OFF, e))
         exit(1)
 
-def assert_test(log_file_path, assert_file_path):
+def assert_test(log_file_path, assert_file_path, words_validate=True):
     """Checks the provided log file
     to see if it contains the strings provided in the assert file
 
     Keyword arguments:
     log_file_path -- string -- The path to the log file
-    assert_file_path -- string -- The path to the assert file"""
+    assert_file_path -- string -- The path to the assert file
+    words_validate -- bool -- When True, check if words exist for PASS.
+        If False, then check if words exist for FAIL."""
 
     try:
         with open(log_file_path) as log_file, \
@@ -131,6 +134,7 @@ def assert_test(log_file_path, assert_file_path):
 
             # Check each test type
             for row in asserts:
+                # Output checking test type
                 print("{0}Checking '{2}'{1}".format(
                     UB_YELLOW,
                     COLOR_OFF,
@@ -140,18 +144,21 @@ def assert_test(log_file_path, assert_file_path):
                 # Check each assert
                 # Skip the first entry
                 #   because it is just the call type for printing
-                for check in row[1:]:
-                    message = "Checking for '{0}'".format(check)
+                for words in row[1:]:
+                    if words_validate:
+                        message = "Checking for '{0}'".format(words)
+                        search_output = is_string_in_file(words, log_file_path)
+                    else:
+                        message = "Verifying there are no '{0}' messages".format(word)
+                        search_output = not is_string_in_file(words, log_file_path)
                     message = append_trail_to_string(message, '.', MESSAGE_LENGTH)
 
-                    search_output = is_string_in_file(check, log_file_path)
-
+                    # This formats to something like:
+                    #   Checking for 'TEST'.....[PASS]
+                    message = "".join([message, '[', get_pass_fail_message(search_result), ']'])
                     # Should return success as True/False
                     #   rather than do output here
-                    print("{0}{1}".format(
-                        message,
-                        get_pass_fail_message(search_output)
-                    ))
+                    print(message)
     except IOError as e:
         # File(s) could not be opened
         print("Operation failed: {0}{2}{1}".format(B_RED, COLOR_OFF, e))
@@ -172,45 +179,26 @@ def assert_log_size(log_file_path, base_log_file_path):
 
     return line_counts_equal
 
-def assert_negative_test(log_file_path):
-    """Checks the provided log file to see if it does NOT contain certain words 
+def main(log_file_path,
+         positive_assert_file_path,
+         negative_assert_file_path,
+         base_log_file_path):
+    """Run the assertion files checks against the log file.
 
     Keyword arguments:
-    log_file_path -- string -- The path to the log file"""
+    log_file_path -- string -- The log to check against
+    positive_assert_file_path -- string -- CSV file with strings to check the log file for having to pass
+    negative_assert_file_path -- string -- CSV file with strings to check the log file for NOT having to pass
+    base_log_file_path -- string -- The control log file which has a known working case"""
 
-    try:
-        bad_words = [
-                        "NOTICE",
-                        "notice",
-                        "WARNING",
-                        "warning",
-                        "ERROR",
-                        "error",
-                        "DEBUG",
-                        "debug",
-                    ]
-
-        for word in bad_words:
-            message = "Verifying there are no '{0}' messages".format(word)
-            message = append_trail_to_string(message, '.', MESSAGE_LENGTH)
-            search_output = is_string_in_file(word, log_file_path)
-            print("{0}{1}".format(
-                message,
-                get_pass_fail_message(not search_output)
-            ))
-
-    except IOError as e:
-        # File(s) could not be opened
-        print("Operation failed: {0}{2}{1}".format(B_RED, COLOR_OFF, e))
-        exit(1)
-
-def main(log_file_path, assert_file_path, base_log_file_path):
     log_file_path = log_file_path.strip()
-    assert_file_path = assert_file_path.strip()
+    positive_assert_file_path = assert_file_path.strip()
+    negative_assert_file_path = negative_assert_file_path.strip()
     base_log_file_path = base_log_file_path.strip()
 
     if (not log_file_path or
-        not assert_file_path or
+        not positive_assert_file_path or
+        not negative_assert_file_path or
         not base_log_file_path):
         usage()
         exit(1)
@@ -218,7 +206,7 @@ def main(log_file_path, assert_file_path, base_log_file_path):
     # Dividing line in output
     dividing_line = append_trail_to_string("", '-', MESSAGE_LENGTH)
 
-    assert_test(log_file_path, assert_file_path)
+    assert_test(log_file_path, positive_assert_file_path, True)
 
     print(dividing_line)
 
@@ -232,16 +220,23 @@ def main(log_file_path, assert_file_path, base_log_file_path):
 
     print(dividing_line)
 
-    assert_negative_test(log_file_path)
+    assert_test(log_file_path, negative_assert_file_path, False)
+
+    # Everything ran without a problem
+    return True
 
 if __name__ == '__main__':
-    # Needs a log_file, an assertion file, and a base_log_file
-    if len(sys.argv[1:]) < 3:
+    # Needs a log_file,
+    # a positive assertion file,
+    # a negative assertion file,
+    # and a base_log_file
+    if len(sys.argv[1:]) < 4:
         usage()
         exit(1)
 
     log_file_path = sys.argv[1]
-    assert_file_path = sys.argv[2]
-    base_log_file_path = sys.argv[3]
+    positive_assert_file_path = sys.argv[2]
+    negative_assert_file_path = sys.argv[3]
+    base_log_file_path = sys.argv[4]
 
-    main(log_file_path, assert_file_path, base_log_file_path)
+    main(log_file_path, positive_assert_file_path, negative_assert_file_path, base_log_file_path)

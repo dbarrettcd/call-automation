@@ -17,7 +17,7 @@ MESSAGE_LENGTH = 100
 
 def usage():
     print("""Usage:
-    {0} <log_file> <assert_file> <base_log_file>""".format(sys.argv[0]))
+    {0} <log_file> <positive_assert_file> <negative_assert_file> <base_log_file>""".format(sys.argv[0]))
 
 def append_trail_to_string(string, trail_string='.', string_length=100):
     """Add a trail to the end of the provided string up to the defined length.
@@ -73,12 +73,12 @@ def is_string_in_file(string, file_path):
             # Using mmap offers better memory performance
             #   especially for large files compared to using something like
             #   if string in open(file_path).read()
-            with mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ) as buf:
-                # string must be converted to a bytes object
-                #   for it to be usable with the mmap object
-                bytes_string = bytes(string)
+            buf = mmap.mmap(file.fileno(), 0, access=mmap.ACCESS_READ)
+            # string must be converted to a bytes object
+            #   for it to be usable with the mmap object
+            bytes_string = bytes(string)
 
-                string_in_file = buf.find(bytes_string) != -1
+            string_in_file = buf.find(bytes_string) != -1
 
         return string_in_file
     except IOError as e:
@@ -97,10 +97,10 @@ def count_lines_in_file(file_path):
         lines = 0
 
         with open(file_path, "r+") as f:
-            with mmap.mmap(f.fileno(), 0) as buf:
-                readline = buf.readline
-                while readline():
-                    lines += 1
+            buf = mmap.mmap(f.fileno(), 0)
+            readline = buf.readline
+            while readline():
+                lines += 1
 
         return lines
     except IOError as e:
@@ -147,10 +147,10 @@ def assert_test(log_file_path, assert_file_path, words_validate=True):
                 for words in row[1:]:
                     if words_validate:
                         message = "Checking for '{0}'".format(words)
-                        search_output = is_string_in_file(words, log_file_path)
+                        search_result = is_string_in_file(words, log_file_path)
                     else:
-                        message = "Verifying there are no '{0}' messages".format(word)
-                        search_output = not is_string_in_file(words, log_file_path)
+                        message = "Verifying there are no '{0}' messages".format(words)
+                        search_result = not is_string_in_file(words, log_file_path)
                     message = append_trail_to_string(message, '.', MESSAGE_LENGTH)
 
                     # This formats to something like:
@@ -192,7 +192,7 @@ def main(log_file_path,
     base_log_file_path -- string -- The control log file which has a known working case"""
 
     log_file_path = log_file_path.strip()
-    positive_assert_file_path = assert_file_path.strip()
+    positive_assert_file_path = positive_assert_file_path.strip()
     negative_assert_file_path = negative_assert_file_path.strip()
     base_log_file_path = base_log_file_path.strip()
 
@@ -211,12 +211,10 @@ def main(log_file_path,
     print(dividing_line)
 
     message = "Checking line count against base"
-    message = append_trail_to_string(message, MESSAGE_LENGTH)
+    message = append_trail_to_string(message, '.', MESSAGE_LENGTH)
     log_size_equal = assert_log_size(log_file_path, base_log_file_path)
-    print("{0}{1}".format(
-        message,
-        get_pass_fail_message(log_size_equal)
-    ))
+    message = "".join([message, '[', get_pass_fail_message(log_size_equal), ']'])
+    print(message)
 
     print(dividing_line)
 

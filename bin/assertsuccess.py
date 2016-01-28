@@ -31,7 +31,7 @@ def append_trail_to_string(string, trail_string='.', string_length=100):
     Returns: string"""
 
     if (trail_string == '' or
-       len(string) >= string_length):
+        len(string) >= string_length):
         return string
 
     while len(string) < string_length:

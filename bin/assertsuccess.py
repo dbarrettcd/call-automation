@@ -30,8 +30,16 @@ def append_trail_to_string(string, trail_string='.', string_length=100):
 
     Returns: string"""
 
+    if (trail_string == '' or
+       len(string) >= string_length):
+        return string
+
     while len(string) < string_length:
-        string = "".join([string, trail_string])
+        for char in trail_string:
+            if len(string) >= string_length:
+                break
+
+            string = "".join([string, char])
 
     return string
 

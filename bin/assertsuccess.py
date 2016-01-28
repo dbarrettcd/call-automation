@@ -134,6 +134,10 @@ def assert_test(log_file_path, assert_file_path, words_validate=True):
 
             # Check each test type
             for row in asserts:
+                # Skip row if there is not at least a test type and assertion
+                if len(row) < 2:
+                    continue
+
                 # Output checking test type
                 print("{0}Checking '{2}'{1}".format(
                     UB_YELLOW,
@@ -145,6 +149,10 @@ def assert_test(log_file_path, assert_file_path, words_validate=True):
                 # Skip the first entry
                 #   because it is just the call type for printing
                 for words in row[1:]:
+                    # Skip if entry is empty
+                    if words.strip() == "":
+                        continue
+
                     if words_validate:
                         message = "Checking for '{0}'".format(words)
                         search_result = is_string_in_file(words, log_file_path)

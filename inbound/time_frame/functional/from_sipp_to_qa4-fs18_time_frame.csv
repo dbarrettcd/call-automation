@@ -4,4 +4,4 @@ SEQUENTIAL
 # field2 - ssh key for fs18
 # field3 - asterisk log
 # field4 - location of file output
-6178302175;vagrant@qa4-fs18.dev.coredial.com;ssh/vagrant_key;/var/log/asterisk/full;inbound/time_frame/functional/inbound_time_frame_voicemail_new.txt;
+6178302175;vagrant@qa4-fs18.dev.coredial.com;ssh/vagrant_key;/var/log/asterisk/full;inbound/time_frame/functional/inbound_time_frame_voicemail_base.txt;

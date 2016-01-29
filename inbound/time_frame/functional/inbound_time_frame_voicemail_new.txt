@@ -1,179 +1,182 @@
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@pbx_in:1] Goto("SIP/172.16.128.89-00003053", "realtime_in,6178302175,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (realtime_in,6178302175,1)
-[Jan 22 09:56:29] VERBOSE[29582] pbx_realtime.c:     -- Executing [6178302175@realtime_in:1] GoTo("SIP/172.16.128.89-00003053", "pstn_gateway_peer,6178302175,1")
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (pstn_gateway_peer,6178302175,1)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:1] Verbose("SIP/172.16.128.89-00003053", "2,Received inbound PSTN call from SBC gateway sip:SIPp@172.16.128.89 dialed 6178302175") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Received inbound PSTN call from SBC gateway sip:SIPp@172.16.128.89 dialed 6178302175
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:2] Set("SIP/172.16.128.89-00003053", "CALLERID(ani)=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:3] Set("SIP/172.16.128.89-00003053", "CALLERID(number)=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:4] Set("SIP/172.16.128.89-00003053", "CALL_ORIGIN=PSTN") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:5] Macro("SIP/172.16.128.89-00003053", "setup_call_environment,6178302175") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:1] Verbose("SIP/172.16.128.89-00003053", "2,Doing call environment setup") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Doing call environment setup
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:2] Set("SIP/172.16.128.89-00003053", "CDR(userfield)=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:3] Set("SIP/172.16.128.89-00003053", "CDR(userfield)=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:4] GosubIf("SIP/172.16.128.89-00003053", "0?endpointquery,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:5] GosubIf("SIP/172.16.128.89-00003053", "0?siptrunkquery,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:6] GosubIf("SIP/172.16.128.89-00003053", "0?faxlinequery,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:7] GosubIf("SIP/172.16.128.89-00003053", "1?pstnquery,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:1] Verbose("SIP/172.16.128.89-00003053", "2,Do ODBC lookup with PSTN SQL for 6178302175") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Do ODBC lookup with PSTN SQL for 6178302175
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:2] Set("SIP/172.16.128.89-00003053", "ARRAY(resellerId,pbxId,pbxContext,defaultMohClass,hasCustomPbxDialplan,pbxSuspended)=1,5,srei,srei_Outbound_Calls,0,0") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:3] Set("SIP/172.16.128.89-00003053", "CDR(userfield)=&RESELLERID:1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:4] GotoIf("SIP/172.16.128.89-00003053", "1?pstnqueryDone") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (macro-setup_call_environment,pstnquery,8)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:8] Return("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:8] Set("SIP/172.16.128.89-00003053", "ARRAY(canInternational,canSevenDigit,canTenDigit,canElevenDigit,canExtension,canBlockCallerID,canAccountCodes,canFeatureCodes)=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:9] Set("SIP/172.16.128.89-00003053", "CDR(cd_branchId)=5") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:10] Set("SIP/172.16.128.89-00003053", "__TRANSFER_CONTEXT=srei") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:11] Macro("SIP/172.16.128.89-00003053", "setup_moh,srei_Outbound_Calls") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:1] Verbose("SIP/172.16.128.89-00003053", "2,Setting up MOH settings for class 'srei_Outbound_Calls'") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Setting up MOH settings for class 'srei_Outbound_Calls'
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:2] GosubIf("SIP/172.16.128.89-00003053", "0?exit,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:3] Set("SIP/172.16.128.89-00003053", "CHANNEL(musicclass)=srei_Outbound_Calls") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:4] Goto("SIP/172.16.128.89-00003053", "exit,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (macro-setup_moh,exit,1)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [exit@macro-setup_moh:1] MacroExit("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:12] MacroIf("SIP/172.16.128.89-00003053", "0?account_suspended,6178302175,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_call_environment:13] MacroExit("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:6] Goto("SIP/172.16.128.89-00003053", "inbound_pstn_call,6178302175,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (inbound_pstn_call,6178302175,1)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:1] Verbose("SIP/172.16.128.89-00003053", "2,We have an incoming PSTN call to DID 6178302175") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == We have an incoming PSTN call to DID 6178302175
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:2] Set("SIP/172.16.128.89-00003053", "ARRAY(callPaths,faxPaths,routeToMacro,routeToId,holidayMacro,holidayId,mohClass,cnamType,cnamText,enablePrivacyManager)=1010,1,srei_aa_Main,7,srei_voicemail,999,default,1,,0") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:3] Set("SIP/172.16.128.89-00003053", "__INCOMINGNUMBER=6178302175") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:4] Set("SIP/172.16.128.89-00003053", "CDR(userfield)=DID:6178302175") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:5] GotoIf("SIP/172.16.128.89-00003053", "0?doFax") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:6] Set("SIP/172.16.128.89-00003053", "maxPaths=1010") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:7] Set("SIP/172.16.128.89-00003053", "isFaxCall=0") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:8] Goto("SIP/172.16.128.89-00003053", "doneMaxPaths") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (inbound_pstn_call,6178302175,12)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:12] Macro("SIP/172.16.128.89-00003053", "setup_moh,default") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:1] Verbose("SIP/172.16.128.89-00003053", "2,Setting up MOH settings for class 'default'") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Setting up MOH settings for class 'default'
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:2] GosubIf("SIP/172.16.128.89-00003053", "0?exit,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:3] Set("SIP/172.16.128.89-00003053", "CHANNEL(musicclass)=default") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-setup_moh:4] Goto("SIP/172.16.128.89-00003053", "exit,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (macro-setup_moh,exit,1)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [exit@macro-setup_moh:1] MacroExit("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:13] Macro("SIP/172.16.128.89-00003053", "va_do_cnam,1,") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_do_cnam:1] Verbose("SIP/172.16.128.89-00003053", "2,Setting CNAM") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Setting CNAM
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_do_cnam:2] GotoIf("SIP/172.16.128.89-00003053", "1?orig_only,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (macro-va_do_cnam,orig_only,1)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [orig_only@macro-va_do_cnam:1] Verbose("SIP/172.16.128.89-00003053", "2,Setting CNAM to original only") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Setting CNAM to original only
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [orig_only@macro-va_do_cnam:2] MacroExit("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:14] Macro("SIP/172.16.128.89-00003053", "pathvalidate,srei,1010,inbound,0") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-pathvalidate:1] Verbose("SIP/172.16.128.89-00003053", "checking path count for srei") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c: checking path count for srei
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-pathvalidate:2] Set("SIP/172.16.128.89-00003053", "optGroupName=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-pathvalidate:3] Set("SIP/172.16.128.89-00003053", "groupName=srei") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-pathvalidate:4] Set("SIP/172.16.128.89-00003053", "GROUP()=srei") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-pathvalidate:5] NoOp("SIP/172.16.128.89-00003053", "srei COUNT:1 MAX:1010") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-pathvalidate:6] Set("SIP/172.16.128.89-00003053", "CDR(cd_pathcount)=1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-pathvalidate:7] GotoIf("SIP/172.16.128.89-00003053", "0?inbound_path_exceeded,s,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:15] Macro("SIP/172.16.128.89-00003053", "va_record_call,5,3,6178302175") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_record_call:1] Verbose("SIP/172.16.128.89-00003053", "2,Checking if we should record this call") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Checking if we should record this call
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_record_call:2] Set("SIP/172.16.128.89-00003053", "ARRAY(recordingQuota,displayFrom,displayTo,displayExt,displayQueue,displayAgent,displayUID,enableTime,sunday,monday,tuesday,wednesday,thursday,friday,saturday)=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_record_call:3] GosubIf("SIP/172.16.128.89-00003053", "1?no-record,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [no-record@macro-va_record_call:1] Verbose("SIP/172.16.128.89-00003053", "2,Don't have to  record the call...") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Don't have to  record the call...
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [no-record@macro-va_record_call:2] MacroExit("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:16] Macro("SIP/172.16.128.89-00003053", "va_check_callblock,,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_check_callblock:1] Verbose("SIP/172.16.128.89-00003053", "2,Checking to see if  is blocked for 1bound calls") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Checking to see if  is blocked for 1bound calls
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_check_callblock:2] Set("SIP/172.16.128.89-00003053", "ARRAY(blocked,informType)=") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_check_callblock:3] GotoIf("SIP/172.16.128.89-00003053", "0?blocked,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-va_check_callblock:4] MacroExit("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:17] GosubIf("SIP/172.16.128.89-00003053", "0?va_privacy_manager,s,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:18] Set("SIP/172.16.128.89-00003053", "ARRAY(isHoliday)=0") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:19] GotoIf("SIP/172.16.128.89-00003053", "1?workday") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (inbound_pstn_call,6178302175,26)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:26] Verbose("SIP/172.16.128.89-00003053", "2,Sending call to routeTo macro of srei_aa_Main 7") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Sending call to routeTo macro of srei_aa_Main 7
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [6178302175@inbound_pstn_call:27] ExecIf("SIP/172.16.128.89-00003053", "1?GoSub(srei_aa_Main,s-7,1)") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s-7@srei_aa_Main:1] Verbose("SIP/172.16.128.89-00003053", "2,Call entered Auto Attendant #7 for pbx srei") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Call entered Auto Attendant #7 for pbx srei
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s-7@srei_aa_Main:2] Set("SIP/172.16.128.89-00003053", "autoAttendantContext=srei_aa_Main") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s-7@srei_aa_Main:3] Set("SIP/172.16.128.89-00003053", "autoAttendantId=7") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s-7@srei_aa_Main:4] Goto("SIP/172.16.128.89-00003053", "s,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Goto (srei_aa_Main,s,1)
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@srei_aa_Main:1] NoOp("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@srei_aa_Main:2] Macro("SIP/172.16.128.89-00003053", "redirection_count") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:1] Verbose("SIP/172.16.128.89-00003053", "2,Performing loop detection") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] app_verbose.c:   == Performing loop detection
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:2] Set("SIP/172.16.128.89-00003053", "REDIRECT_TIME_LIMIT=1453474588") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:3] GotoIf("SIP/172.16.128.89-00003053", "0?redirect_count,1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:4] Set("SIP/172.16.128.89-00003053", "__REDIRECT_TIME=1453474589") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:5] Set("SIP/172.16.128.89-00003053", "__REDIRECT_COUNT=1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@srei_aa_Main:3] Set("SIP/172.16.128.89-00003053", "ARRAY(aaResponseTimeout,aaDigitTimeout,aaAudioFile,timeoutMacro,timeoutId,oneMacro,oneId,twoMacro,twoId,threeMacro,threeId,fourMacro,fourId,fiveMacro,fiveId,sixMacro,sixId,sevenMacro,sevenId,eightMacro,eightId,nineMacro,nineId,zeroMacro,zeroId,starMacro,starId,poundMacro,poundId)=15,5,coredial/default_aa_greeting,srei_voicemail,999,srei_voicemail,999,srei_extensions,100,srei_outside_number,79,srei_ah_SIPp_Time_Frame,13,srei_aa_Main,7,,0,,0,,0,srei_aa_After_Hours,8,srei_aa_Main,7,va_company_directory,0,va_check_voicemail,0") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@srei_aa_Main:4] Set("SIP/172.16.128.89-00003053", "TIMEOUT(response)=15") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] func_timeout.c:     -- Response timeout set to 15.000
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@srei_aa_Main:5] Set("SIP/172.16.128.89-00003053", "TIMEOUT(digit)=5") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] func_timeout.c:     -- Digit timeout set to 5.000
-[Jan 22 09:56:29] VERBOSE[29582] pbx.c:     -- Executing [s@srei_aa_Main:6] BackGround("SIP/172.16.128.89-00003053", "silence/1") in new stack
-[Jan 22 09:56:29] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'silence/1.gsm' (language 'en')
-[Jan 22 09:56:30] VERBOSE[29582] pbx.c:     -- Executing [s@srei_aa_Main:7] BackGround("SIP/172.16.128.89-00003053", "coredial/default_aa_greeting") in new stack
-[Jan 22 09:56:30] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'coredial/default_aa_greeting.slin' (language 'en')
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:   == CDR updated on SIP/172.16.128.89-00003053
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [4@srei_aa_Main:1] GotoIf("SIP/172.16.128.89-00003053", "1?srei_ah_SIPp_Time_Frame,s-13,1:go4,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Goto (srei_ah_SIPp_Time_Frame,s-13,1)
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s-13@srei_ah_SIPp_Time_Frame:1] Verbose("SIP/172.16.128.89-00003053", "2,Time frame #13 for PBX srei called") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] app_verbose.c:   == Time frame #13 for PBX srei called
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s-13@srei_ah_SIPp_Time_Frame:2] Set("SIP/172.16.128.89-00003053", "timeFrameId=13") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s-13@srei_ah_SIPp_Time_Frame:3] Goto("SIP/172.16.128.89-00003053", "s,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Goto (srei_ah_SIPp_Time_Frame,s,1)
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:1] NoOp("SIP/172.16.128.89-00003053", "") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:2] Macro("SIP/172.16.128.89-00003053", "redirection_count") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:1] Verbose("SIP/172.16.128.89-00003053", "2,Performing loop detection") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] app_verbose.c:   == Performing loop detection
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:2] Set("SIP/172.16.128.89-00003053", "REDIRECT_TIME_LIMIT=1453474606") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:3] GotoIf("SIP/172.16.128.89-00003053", "0?redirect_count,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:4] Set("SIP/172.16.128.89-00003053", "__REDIRECT_TIME=1453474607") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@macro-redirection_count:5] Set("SIP/172.16.128.89-00003053", "__REDIRECT_COUNT=1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:3] Set("SIP/172.16.128.89-00003053", "ARRAY(sunday,monday,tuesday,wednesday,thursday,friday,saturday,duringMacro,duringId,afterMacro,afterId)=0:00-0:00,0:00-0:00,0:00-0:00,14:00-19:00,*,*,0:00-0:00,srei_voicemail,999,srei_voicemail,5000") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:4] GotoIfTime("SIP/172.16.128.89-00003053", "0:00-0:00,sun,*,*?during,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:5] GotoIfTime("SIP/172.16.128.89-00003053", "*,sun,*,*?after,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:6] GotoIfTime("SIP/172.16.128.89-00003053", "0:00-0:00,mon,*,*?during,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:7] GotoIfTime("SIP/172.16.128.89-00003053", "*,mon,*,*?after,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:8] GotoIfTime("SIP/172.16.128.89-00003053", "0:00-0:00,tue,*,*?during,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:9] GotoIfTime("SIP/172.16.128.89-00003053", "*,tue,*,*?after,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:10] GotoIfTime("SIP/172.16.128.89-00003053", "14:00-19:00,wed,*,*?during,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:11] GotoIfTime("SIP/172.16.128.89-00003053", "*,wed,*,*?after,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:12] GotoIfTime("SIP/172.16.128.89-00003053", "*,thu,*,*?during,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:13] GotoIfTime("SIP/172.16.128.89-00003053", "*,thu,*,*?after,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:14] GotoIfTime("SIP/172.16.128.89-00003053", "*,fri,*,*?during,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Goto (srei_ah_SIPp_Time_Frame,during,1)
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [during@srei_ah_SIPp_Time_Frame:1] Verbose("SIP/172.16.128.89-00003053", "2,It's during hours...") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] app_verbose.c:   == It's during hours...
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [during@srei_ah_SIPp_Time_Frame:2] Goto("SIP/172.16.128.89-00003053", "srei_voicemail,s-999,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Goto (srei_voicemail,s-999,1)
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s-999@srei_voicemail:1] Verbose("SIP/172.16.128.89-00003053", "2,Macro va_voicemail called with ID 999") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] app_verbose.c:   == Macro va_voicemail called with ID 999
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s-999@srei_voicemail:2] Set("SIP/172.16.128.89-00003053", "ARRAY(mailboxType,announceType,announceOnly,mailboxNumber,dialDuringAnnounce,mailboxContext)=1,u,0,999,0,srei") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s-999@srei_voicemail:3] Set("SIP/172.16.128.89-00003053", "CDR(userfield)=DID:6178302175&MAILBOX:999") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [s-999@srei_voicemail:4] GotoIf("SIP/172.16.128.89-00003053", "0?broadcast,1:standard,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Goto (srei_voicemail,standard,1)
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [standard@srei_voicemail:1] Verbose("SIP/172.16.128.89-00003053", "2,Standard mailbox") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] app_verbose.c:   == Standard mailbox
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [standard@srei_voicemail:2] GotoIf("SIP/172.16.128.89-00003053", "0?dda,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [standard@srei_voicemail:3] GotoIf("SIP/172.16.128.89-00003053", "0?announce,1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] pbx.c:     -- Executing [standard@srei_voicemail:4] Playback("SIP/172.16.128.89-00003053", "silence/1") in new stack
-[Jan 22 09:56:47] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'silence/1.gsm' (language 'en')
-[Jan 22 09:56:48] VERBOSE[29582] pbx.c:     -- Executing [standard@srei_voicemail:5] VoiceMail("SIP/172.16.128.89-00003053", "999@srei,u") in new stack
-[Jan 22 09:56:48] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'vm-theperson.gsm' (language 'en')
-[Jan 22 09:56:49] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'digits/9.gsm' (language 'en')
-[Jan 22 09:56:50] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'digits/9.gsm' (language 'en')
-[Jan 22 09:56:51] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'digits/9.gsm' (language 'en')
-[Jan 22 09:56:52] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'vm-isunavail.gsm' (language 'en')
-[Jan 22 09:56:53] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'vm-intro.gsm' (language 'en')
-[Jan 22 09:56:58] VERBOSE[29582] file.c:     -- <SIP/172.16.128.89-00003053> Playing 'beep.gsm' (language 'en')
-[Jan 22 09:56:59] VERBOSE[29582] app_voicemail.c:     -- Recording the message
-[Jan 22 09:56:59] VERBOSE[29582] app.c:     -- x=0, open writing:  /var/spool/asterisk/voicemail/srei/999/tmp/Fy5x3L format: wav49, 0xb0a1ad00
-[Jan 22 09:56:59] VERBOSE[29582] app.c:     -- x=1, open writing:  /var/spool/asterisk/voicemail/srei/999/tmp/Fy5x3L format: gsm, 0xb0a19de8
-[Jan 22 09:56:59] VERBOSE[29582] app.c:     -- x=2, open writing:  /var/spool/asterisk/voicemail/srei/999/tmp/Fy5x3L format: wav, 0xb0a08f30
-[Jan 22 09:57:00] NOTICE[29582] channel.c: Dropping incompatible voice frame on SIP/172.16.128.89-00003053 of format alaw since our native format has changed to 0x2 (gsm)
-[Jan 22 09:57:10] VERBOSE[29582] app.c:     -- User hung up
-[Jan 22 09:57:10] VERBOSE[29582] pbx.c:   == Spawn extension (srei_voicemail, standard, 5) exited non-zero on 'SIP/172.16.128.89-00003053'
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@pbx_in:1] Goto("SIP/172.16.128.89-00000022", "realtime_in,6178302175,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (realtime_in,6178302175,1)
+[Jan 29 10:29:27] VERBOSE[10556] pbx_realtime.c:     -- Executing [6178302175@realtime_in:1] GoTo("SIP/172.16.128.89-00000022", "pstn_gateway_peer,6178302175,1")
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (pstn_gateway_peer,6178302175,1)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:1] Verbose("SIP/172.16.128.89-00000022", "2,Received inbound PSTN call from SBC gateway sip:SIPp@172.16.128.89 dialed 6178302175") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Received inbound PSTN call from SBC gateway sip:SIPp@172.16.128.89 dialed 6178302175
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:2] Set("SIP/172.16.128.89-00000022", "CALLERID(ani)=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:3] Set("SIP/172.16.128.89-00000022", "CALLERID(number)=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:4] Set("SIP/172.16.128.89-00000022", "CALL_ORIGIN=PSTN") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:5] Macro("SIP/172.16.128.89-00000022", "setup_call_environment,6178302175") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:1] Verbose("SIP/172.16.128.89-00000022", "2,Doing call environment setup") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Doing call environment setup
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:2] Set("SIP/172.16.128.89-00000022", "CDR(userfield)=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:3] Set("SIP/172.16.128.89-00000022", "CDR(userfield)=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:4] GosubIf("SIP/172.16.128.89-00000022", "0?endpointquery,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:5] GosubIf("SIP/172.16.128.89-00000022", "0?siptrunkquery,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:6] GosubIf("SIP/172.16.128.89-00000022", "0?faxlinequery,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:7] GosubIf("SIP/172.16.128.89-00000022", "1?pstnquery,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:1] Verbose("SIP/172.16.128.89-00000022", "2,Do ODBC lookup with PSTN SQL for 6178302175") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Do ODBC lookup with PSTN SQL for 6178302175
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:2] Set("SIP/172.16.128.89-00000022", "ARRAY(resellerId,pbxId,pbxContext,defaultMohClass,hasCustomPbxDialplan,pbxSuspended)=1,5,srei,srei_Outbound_Calls,0,0") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:3] Set("SIP/172.16.128.89-00000022", "CDR(userfield)=&RESELLERID:1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:4] GotoIf("SIP/172.16.128.89-00000022", "1?pstnqueryDone") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (macro-setup_call_environment,pstnquery,8)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [pstnquery@macro-setup_call_environment:8] Return("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] func_odbc.c:        > Found no rows [SELECT canInternational, canSevenDigit, canTenDigit, canElevenDigit, canExtension, canBlockCallerID, canAccountCodes, canFeatureCodes FROM extension WHERE pbxId=5 AND sipUsername='']
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:8] Set("SIP/172.16.128.89-00000022", "ARRAY(canInternational,canSevenDigit,canTenDigit,canElevenDigit,canExtension,canBlockCallerID,canAccountCodes,canFeatureCodes)=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:9] Set("SIP/172.16.128.89-00000022", "CDR(cd_branchId)=5") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:10] Set("SIP/172.16.128.89-00000022", "__TRANSFER_CONTEXT=srei") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:11] Macro("SIP/172.16.128.89-00000022", "setup_moh,srei_Outbound_Calls") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:1] Verbose("SIP/172.16.128.89-00000022", "2,Setting up MOH settings for class 'srei_Outbound_Calls'") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Setting up MOH settings for class 'srei_Outbound_Calls'
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:2] GosubIf("SIP/172.16.128.89-00000022", "0?exit,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:3] Set("SIP/172.16.128.89-00000022", "CHANNEL(musicclass)=srei_Outbound_Calls") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:4] Goto("SIP/172.16.128.89-00000022", "exit,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (macro-setup_moh,exit,1)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [exit@macro-setup_moh:1] MacroExit("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:12] MacroIf("SIP/172.16.128.89-00000022", "0?account_suspended,6178302175,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_call_environment:13] MacroExit("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@pstn_gateway_peer:6] Goto("SIP/172.16.128.89-00000022", "inbound_pstn_call,6178302175,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (inbound_pstn_call,6178302175,1)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:1] Verbose("SIP/172.16.128.89-00000022", "2,We have an incoming PSTN call to DID 6178302175") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == We have an incoming PSTN call to DID 6178302175
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:2] Set("SIP/172.16.128.89-00000022", "ARRAY(callPaths,faxPaths,routeToMacro,routeToId,holidayMacro,holidayId,mohClass,cnamType,cnamText,enablePrivacyManager)=1010,1,srei_aa_Main,7,srei_voicemail,999,default,1,,0") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:3] Set("SIP/172.16.128.89-00000022", "__INCOMINGNUMBER=6178302175") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:4] Set("SIP/172.16.128.89-00000022", "CDR(userfield)=DID:6178302175") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:5] GotoIf("SIP/172.16.128.89-00000022", "0?doFax") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:6] Set("SIP/172.16.128.89-00000022", "maxPaths=1010") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:7] Set("SIP/172.16.128.89-00000022", "isFaxCall=0") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:8] Goto("SIP/172.16.128.89-00000022", "doneMaxPaths") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (inbound_pstn_call,6178302175,12)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:12] Macro("SIP/172.16.128.89-00000022", "setup_moh,default") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:1] Verbose("SIP/172.16.128.89-00000022", "2,Setting up MOH settings for class 'default'") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Setting up MOH settings for class 'default'
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:2] GosubIf("SIP/172.16.128.89-00000022", "0?exit,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:3] Set("SIP/172.16.128.89-00000022", "CHANNEL(musicclass)=default") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-setup_moh:4] Goto("SIP/172.16.128.89-00000022", "exit,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (macro-setup_moh,exit,1)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [exit@macro-setup_moh:1] MacroExit("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:13] Macro("SIP/172.16.128.89-00000022", "va_do_cnam,1,") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_do_cnam:1] Verbose("SIP/172.16.128.89-00000022", "2,Setting CNAM") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Setting CNAM
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_do_cnam:2] GotoIf("SIP/172.16.128.89-00000022", "1?orig_only,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (macro-va_do_cnam,orig_only,1)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [orig_only@macro-va_do_cnam:1] Verbose("SIP/172.16.128.89-00000022", "2,Setting CNAM to original only") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Setting CNAM to original only
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [orig_only@macro-va_do_cnam:2] MacroExit("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:14] Macro("SIP/172.16.128.89-00000022", "pathvalidate,srei,1010,inbound,0") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-pathvalidate:1] Verbose("SIP/172.16.128.89-00000022", "checking path count for srei") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c: checking path count for srei
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-pathvalidate:2] Set("SIP/172.16.128.89-00000022", "optGroupName=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-pathvalidate:3] Set("SIP/172.16.128.89-00000022", "groupName=srei") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-pathvalidate:4] Set("SIP/172.16.128.89-00000022", "GROUP()=srei") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-pathvalidate:5] NoOp("SIP/172.16.128.89-00000022", "srei COUNT:1 MAX:1010") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-pathvalidate:6] Set("SIP/172.16.128.89-00000022", "CDR(cd_pathcount)=1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-pathvalidate:7] GotoIf("SIP/172.16.128.89-00000022", "0?inbound_path_exceeded,s,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:15] Macro("SIP/172.16.128.89-00000022", "va_record_call,5,3,6178302175") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_record_call:1] Verbose("SIP/172.16.128.89-00000022", "2,Checking if we should record this call") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Checking if we should record this call
+[Jan 29 10:29:27] VERBOSE[10556] func_odbc.c:        > Found no rows [SELECT recordingQuota, displayFrom, displayTo, displayExt, displayQueue, displayAgent, displayUID, enableTime, sunday, monday, tuesday, wednesday, thursday, friday, saturday FROM recordCall WHERE pbxId=5 AND typeId=3 AND id='6178302175']
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_record_call:2] Set("SIP/172.16.128.89-00000022", "ARRAY(recordingQuota,displayFrom,displayTo,displayExt,displayQueue,displayAgent,displayUID,enableTime,sunday,monday,tuesday,wednesday,thursday,friday,saturday,timezone)=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_record_call:3] GosubIf("SIP/172.16.128.89-00000022", "1?no-record,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [no-record@macro-va_record_call:1] Verbose("SIP/172.16.128.89-00000022", "2,Don't have to  record the call...") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Don't have to  record the call...
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [no-record@macro-va_record_call:2] MacroExit("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:16] Macro("SIP/172.16.128.89-00000022", "va_check_callblock,,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_check_callblock:1] Verbose("SIP/172.16.128.89-00000022", "2,Checking to see if  is blocked for 1bound calls") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Checking to see if  is blocked for 1bound calls
+[Jan 29 10:29:27] VERBOSE[10556] func_odbc.c:        > Found no rows [SELECT 1 AS blocked, informType FROM callBlock WHERE pbxId=5 AND number='' AND direction=1]
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_check_callblock:2] Set("SIP/172.16.128.89-00000022", "ARRAY(blocked,informType)=") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_check_callblock:3] GotoIf("SIP/172.16.128.89-00000022", "0?blocked,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-va_check_callblock:4] MacroExit("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:17] GosubIf("SIP/172.16.128.89-00000022", "0?va_privacy_manager,s,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:18] Set("SIP/172.16.128.89-00000022", "isHoliday=0") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:19] GotoIf("SIP/172.16.128.89-00000022", "1?workday") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (inbound_pstn_call,6178302175,26)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:26] Verbose("SIP/172.16.128.89-00000022", "2,Sending call to routeTo macro of srei_aa_Main 7") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Sending call to routeTo macro of srei_aa_Main 7
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [6178302175@inbound_pstn_call:27] ExecIf("SIP/172.16.128.89-00000022", "1?GoSub(srei_aa_Main,s-7,1)") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s-7@srei_aa_Main:1] Verbose("SIP/172.16.128.89-00000022", "2,Call entered Auto Attendant #7 for pbx srei") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Call entered Auto Attendant #7 for pbx srei
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s-7@srei_aa_Main:2] Set("SIP/172.16.128.89-00000022", "autoAttendantContext=srei_aa_Main") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s-7@srei_aa_Main:3] Set("SIP/172.16.128.89-00000022", "autoAttendantId=7") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s-7@srei_aa_Main:4] Goto("SIP/172.16.128.89-00000022", "s,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Goto (srei_aa_Main,s,1)
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@srei_aa_Main:1] NoOp("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@srei_aa_Main:2] Macro("SIP/172.16.128.89-00000022", "redirection_count") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:1] Verbose("SIP/172.16.128.89-00000022", "2,Performing loop detection") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] app_verbose.c:   == Performing loop detection
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:2] Set("SIP/172.16.128.89-00000022", "REDIRECT_TIME_LIMIT=1454081366") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:3] GotoIf("SIP/172.16.128.89-00000022", "0?redirect_count,1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:4] Set("SIP/172.16.128.89-00000022", "__REDIRECT_TIME=1454081367") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:5] Set("SIP/172.16.128.89-00000022", "__REDIRECT_COUNT=1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@srei_aa_Main:3] Set("SIP/172.16.128.89-00000022", "ARRAY(aaResponseTimeout,aaDigitTimeout,aaAudioFile,timeoutMacro,timeoutId,oneMacro,oneId,twoMacro,twoId,threeMacro,threeId,fourMacro,fourId,fiveMacro,fiveId,sixMacro,sixId,sevenMacro,sevenId,eightMacro,eightId,nineMacro,nineId,zeroMacro,zeroId,starMacro,starId,poundMacro,poundId)=15,5,coredial/default_aa_greeting,srei_voicemail,999,srei_voicemail,999,srei_extensions,100,va_dial_peer,299,srei_ah_SIPp_Time_Frame,13,srei_aa_Main,7,,0,,0,,0,srei_aa_After_Hours,8,srei_aa_Main,7,va_company_directory,0,va_check_voicemail,0") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@srei_aa_Main:4] Set("SIP/172.16.128.89-00000022", "TIMEOUT(response)=15") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] func_timeout.c:     -- Response timeout set to 15.000
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@srei_aa_Main:5] Set("SIP/172.16.128.89-00000022", "TIMEOUT(digit)=5") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] func_timeout.c:     -- Digit timeout set to 5.000
+[Jan 29 10:29:27] VERBOSE[10556] pbx.c:     -- Executing [s@srei_aa_Main:6] BackGround("SIP/172.16.128.89-00000022", "silence/1") in new stack
+[Jan 29 10:29:27] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'silence/1.gsm' (language 'en')
+[Jan 29 10:29:28] VERBOSE[10556] pbx.c:     -- Executing [s@srei_aa_Main:7] BackGround("SIP/172.16.128.89-00000022", "coredial/default_aa_greeting") in new stack
+[Jan 29 10:29:28] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'coredial/default_aa_greeting.slin' (language 'en')
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:   == CDR updated on SIP/172.16.128.89-00000022
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [4@srei_aa_Main:1] GotoIf("SIP/172.16.128.89-00000022", "1?srei_ah_SIPp_Time_Frame,s-13,1:go4,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Goto (srei_ah_SIPp_Time_Frame,s-13,1)
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s-13@srei_ah_SIPp_Time_Frame:1] Verbose("SIP/172.16.128.89-00000022", "2,Time frame #13 for PBX srei called") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] app_verbose.c:   == Time frame #13 for PBX srei called
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s-13@srei_ah_SIPp_Time_Frame:2] Set("SIP/172.16.128.89-00000022", "timeFrameId=13") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s-13@srei_ah_SIPp_Time_Frame:3] Goto("SIP/172.16.128.89-00000022", "s,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Goto (srei_ah_SIPp_Time_Frame,s,1)
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:1] NoOp("SIP/172.16.128.89-00000022", "") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:2] Macro("SIP/172.16.128.89-00000022", "redirection_count") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:1] Verbose("SIP/172.16.128.89-00000022", "2,Performing loop detection") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] app_verbose.c:   == Performing loop detection
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:2] Set("SIP/172.16.128.89-00000022", "REDIRECT_TIME_LIMIT=1454081384") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:3] GotoIf("SIP/172.16.128.89-00000022", "0?redirect_count,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:4] Set("SIP/172.16.128.89-00000022", "__REDIRECT_TIME=1454081385") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@macro-redirection_count:5] Set("SIP/172.16.128.89-00000022", "__REDIRECT_COUNT=1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:3] Set("SIP/172.16.128.89-00000022", "ARRAY(sunday,monday,tuesday,wednesday,thursday,friday,saturday,duringMacro,duringId,afterMacro,afterId,timezone)=0:00-0:00,0:00-0:00,0:00-0:00,0:00-0:00,*,*,0:00-0:00,srei_voicemail,999,srei_voicemail,5000") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:4] GotoIfTime("SIP/172.16.128.89-00000022", "0:00-0:00,sun,*,*,?during,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:5] GotoIfTime("SIP/172.16.128.89-00000022", "*,sun,*,*,?after,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:6] GotoIfTime("SIP/172.16.128.89-00000022", "0:00-0:00,mon,*,*,?during,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:7] GotoIfTime("SIP/172.16.128.89-00000022", "*,mon,*,*,?after,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:8] GotoIfTime("SIP/172.16.128.89-00000022", "0:00-0:00,tue,*,*,?during,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:9] GotoIfTime("SIP/172.16.128.89-00000022", "*,tue,*,*,?after,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:10] GotoIfTime("SIP/172.16.128.89-00000022", "0:00-0:00,wed,*,*,?during,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:11] GotoIfTime("SIP/172.16.128.89-00000022", "*,wed,*,*,?after,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:12] GotoIfTime("SIP/172.16.128.89-00000022", "*,thu,*,*,?during,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:13] GotoIfTime("SIP/172.16.128.89-00000022", "*,thu,*,*,?after,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s@srei_ah_SIPp_Time_Frame:14] GotoIfTime("SIP/172.16.128.89-00000022", "*,fri,*,*,?during,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Goto (srei_ah_SIPp_Time_Frame,during,1)
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [during@srei_ah_SIPp_Time_Frame:1] Verbose("SIP/172.16.128.89-00000022", "2,It's during hours...") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] app_verbose.c:   == It's during hours...
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [during@srei_ah_SIPp_Time_Frame:2] Goto("SIP/172.16.128.89-00000022", "srei_voicemail,s-999,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Goto (srei_voicemail,s-999,1)
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s-999@srei_voicemail:1] Verbose("SIP/172.16.128.89-00000022", "2,Macro va_voicemail called with ID 999") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] app_verbose.c:   == Macro va_voicemail called with ID 999
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s-999@srei_voicemail:2] Set("SIP/172.16.128.89-00000022", "ARRAY(mailboxType,announceType,announceOnly,mailboxNumber,dialDuringAnnounce,mailboxContext)=1,u,0,999,0,srei") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s-999@srei_voicemail:3] Set("SIP/172.16.128.89-00000022", "CDR(userfield)=DID:6178302175&MAILBOX:999") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [s-999@srei_voicemail:4] GotoIf("SIP/172.16.128.89-00000022", "0?broadcast,1:standard,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Goto (srei_voicemail,standard,1)
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [standard@srei_voicemail:1] Verbose("SIP/172.16.128.89-00000022", "2,Standard mailbox") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] app_verbose.c:   == Standard mailbox
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [standard@srei_voicemail:2] GotoIf("SIP/172.16.128.89-00000022", "0?dda,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [standard@srei_voicemail:3] GotoIf("SIP/172.16.128.89-00000022", "0?announce,1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] pbx.c:     -- Executing [standard@srei_voicemail:4] Playback("SIP/172.16.128.89-00000022", "silence/1") in new stack
+[Jan 29 10:29:45] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'silence/1.gsm' (language 'en')
+[Jan 29 10:29:46] VERBOSE[10556] pbx.c:     -- Executing [standard@srei_voicemail:5] VoiceMail("SIP/172.16.128.89-00000022", "999@srei,u") in new stack
+[Jan 29 10:29:46] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'vm-theperson.gsm' (language 'en')
+[Jan 29 10:29:48] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'digits/9.gsm' (language 'en')
+[Jan 29 10:29:48] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'digits/9.gsm' (language 'en')
+[Jan 29 10:29:49] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'digits/9.gsm' (language 'en')
+[Jan 29 10:29:50] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'vm-isunavail.gsm' (language 'en')
+[Jan 29 10:29:51] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'vm-intro.gsm' (language 'en')
+[Jan 29 10:29:57] VERBOSE[10556] file.c:     -- <SIP/172.16.128.89-00000022> Playing 'beep.gsm' (language 'en')
+[Jan 29 10:29:57] VERBOSE[10556] app_voicemail.c:     -- Recording the message
+[Jan 29 10:29:57] VERBOSE[10556] app.c:     -- x=0, open writing:  /var/spool/asterisk/voicemail/srei/999/tmp/PbAYF7 format: wav49, 0xb6ce0000
+[Jan 29 10:29:57] VERBOSE[10556] app.c:     -- x=1, open writing:  /var/spool/asterisk/voicemail/srei/999/tmp/PbAYF7 format: gsm, 0xb6900670
+[Jan 29 10:29:57] VERBOSE[10556] app.c:     -- x=2, open writing:  /var/spool/asterisk/voicemail/srei/999/tmp/PbAYF7 format: wav, 0xb7d1c338
+[Jan 29 10:29:58] NOTICE[10556] channel.c: Dropping incompatible voice frame on SIP/172.16.128.89-00000022 of format alaw since our native format has changed to 0x2 (gsm)
+[Jan 29 10:30:08] VERBOSE[10556] app.c:     -- User hung up
+[Jan 29 10:30:08] VERBOSE[10556] pbx.c:   == Spawn extension (srei_voicemail, standard, 5) exited non-zero on 'SIP/172.16.128.89-00000022'

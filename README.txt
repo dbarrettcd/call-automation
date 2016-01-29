@@ -38,7 +38,7 @@ Functional:
 
 sipp-3.3.990/sipp qa4-fs18.dev.coredial.com -sf inbound/auto_attendant/functional/inbound_auto_attendant_direct.xml -inf inbound/auto_attendant/functional/from_sipp_to_qa4-fs18_auto_attendant.csv -aa -i 172.16.128.89 -nostdin -m 1 
 
-bin/assertsuccess.py inbound/auto_attendant/functional/inbound_auto_attendant_voicemail_new.txt inbound/auto_attendant/functional/assertions.csv inbound/auto_attendant/functional/inbound_auto_attendant_voicemail_base.txt
+bin/assertsuccess.py inbound/auto_attendant/functional/inbound_auto_attendant_voicemail_new.txt inbound/auto_attendant/functional/assertions.csv inbound/auto_attendant/functional/negative_assertions.csv inbound/auto_attendant/functional/inbound_auto_attendant_voicemail_base.txt
 
 Load: 
 
@@ -53,7 +53,7 @@ Functional:
 
 sipp-3.3.990/sipp qa4-fs18.dev.coredial.com -sf inbound/holiday/functional/inbound_holiday_direct.xml -inf inbound/holiday/functional/from_sipp_to_qa4-fs18_holiday.csv -aa -i 172.16.128.89 -nostdin -m 1 
 
-bin/assertsuccess.py inbound/holiday/functional/inbound_holiday_voicemail_new.txt inbound/holiday/functional/assertions.csv inbound/holiday/functional/inbound_holiday_voicemail_base.txt
+bin/assertsuccess.py inbound/holiday/functional/inbound_holiday_voicemail_new.txt inbound/holiday/functional/assertions.csv inbound/holiday/functional/negative_assertions.csv inbound/holiday/functional/inbound_holiday_voicemail_base.txt
 
 Load: 
 

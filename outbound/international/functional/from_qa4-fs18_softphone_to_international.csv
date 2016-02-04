@@ -1,0 +1,9 @@
+SEQUENTIAL
+# field0 - SIP username for qa4-fs18 SIP user
+# field1 - username and password for qa4-fs18 SIP user
+# field2 - International number
+# field3 - fs18 server credentials
+# field4 - ssh key for fs18
+# field5 - asterisk log
+# field6 - location of file output
+sip2999_srei;[authentication username=sip2999_srei password=56a250731544e];0114402076015205;vagrant@qa4-fs18.dev.coredial.com;ssh/vagrant_key;/var/log/asterisk/full;outbound/international/functional/outbound_international_new.txt;

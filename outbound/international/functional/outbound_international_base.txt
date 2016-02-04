@@ -1,0 +1,305 @@
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@srei:1] Verbose("SIP/sip2999_srei-00000051", "2,Received call from endpoint sip:sip2999_srei@172.16.131.234 dialed 0114402076015205") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_verbose.c:   == Received call from endpoint sip:sip2999_srei@172.16.131.234 dialed 0114402076015205
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@srei:2] Set("SIP/sip2999_srei-00000051", "CALL_ORIGIN=EndPoint") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@srei:3] Macro("SIP/sip2999_srei-00000051", "setup_call_environment,0114402076015205") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:1] Verbose("SIP/sip2999_srei-00000051", "2,Doing call environment setup") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_verbose.c:   == Doing call environment setup
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:2] Set("SIP/sip2999_srei-00000051", "CDR(userfield)=") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:3] Set("SIP/sip2999_srei-00000051", "CDR(userfield)=") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:4] GosubIf("SIP/sip2999_srei-00000051", "1?endpointquery,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:1] Verbose("SIP/sip2999_srei-00000051", "2,Do ODBC lookup with EndPoint SQL") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_verbose.c:   == Do ODBC lookup with EndPoint SQL
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:2] Gosub("SIP/sip2999_srei-00000051", "comclientheaders,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [comclientheaders@macro-setup_call_environment:1] Verbose("SIP/sip2999_srei-00000051", "2, Store any com client headers") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_verbose.c:   ==  Store any com client headers
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [comclientheaders@macro-setup_call_environment:2] Set("SIP/sip2999_srei-00000051", "opposingUuid=") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [comclientheaders@macro-setup_call_environment:3] Set("SIP/sip2999_srei-00000051", "opposingUsername=") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [comclientheaders@macro-setup_call_environment:4] Set("SIP/sip2999_srei-00000051", "conversionUuid=") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [comclientheaders@macro-setup_call_environment:5] Return("SIP/sip2999_srei-00000051", "") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:3] GotoIf("SIP/sip2999_srei-00000051", "0?doXfer") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:4] Set("SIP/sip2999_srei-00000051", "ARRAY(resellerId,pbxId,pbxContext,defaultMohClass,hasCustomPbxDialplan,enableIntercom,enablePickup,internationalPinRequired,pbxSuspended)=1,5,srei,srei_Outbound_Calls,0,0,1,1,0") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:5] Set("SIP/sip2999_srei-00000051", "CDR(userfield)=&RESELLERID:1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:6] Set("SIP/sip2999_srei-00000051", "ARRAY(canInternational,canSevenDigit,canTenDigit,canElevenDigit,canExtension,canBlockCallerID,canAccountCodes,canFeatureCodes)=1,1,1,1,1,0,1,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:7] GotoIf("SIP/sip2999_srei-00000051", "0?doBlock") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [endpointquery@macro-setup_call_environment:8] Return("SIP/sip2999_srei-00000051", "") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:5] GosubIf("SIP/sip2999_srei-00000051", "0?siptrunkquery,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:6] GosubIf("SIP/sip2999_srei-00000051", "0?faxlinequery,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:7] GosubIf("SIP/sip2999_srei-00000051", "0?pstnquery,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:8] Set("SIP/sip2999_srei-00000051", "ARRAY(canInternational,canSevenDigit,canTenDigit,canElevenDigit,canExtension,canBlockCallerID,canAccountCodes,canFeatureCodes)=1,1,1,1,1,0,1,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:9] Set("SIP/sip2999_srei-00000051", "CDR(cd_branchId)=5") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:10] Set("SIP/sip2999_srei-00000051", "__TRANSFER_CONTEXT=srei") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:11] Macro("SIP/sip2999_srei-00000051", "setup_moh,srei_Outbound_Calls") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_moh:1] Verbose("SIP/sip2999_srei-00000051", "2,Setting up MOH settings for class 'srei_Outbound_Calls'") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_verbose.c:   == Setting up MOH settings for class 'srei_Outbound_Calls'
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_moh:2] GosubIf("SIP/sip2999_srei-00000051", "0?exit,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_moh:3] Set("SIP/sip2999_srei-00000051", "CHANNEL(musicclass)=srei_Outbound_Calls") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_moh:4] Goto("SIP/sip2999_srei-00000051", "exit,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Goto (macro-setup_moh,exit,1)
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [exit@macro-setup_moh:1] MacroExit("SIP/sip2999_srei-00000051", "") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:12] MacroIf("SIP/sip2999_srei-00000051", "0?account_suspended,0114402076015205,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-setup_call_environment:13] MacroExit("SIP/sip2999_srei-00000051", "") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@srei:4] GosubIf("SIP/sip2999_srei-00000051", "0?srei_custom_pbx_dialplan,0114402076015205,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@srei:5] Goto("SIP/sip2999_srei-00000051", "srei_dialmain,0114402076015205,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Goto (srei_dialmain,0114402076015205,1)
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@srei_dialmain:1] Macro("SIP/sip2999_srei-00000051", "international_check,0114402076015205") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:1] Verbose("SIP/sip2999_srei-00000051", "International Outbound Call") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_verbose.c: International Outbound Call
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:2] GotoIf("SIP/sip2999_srei-00000051", "0?not_allowed,s,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:3] Set("SIP/sip2999_srei-00000051", "ARRAY(callPaths,faxPaths,callerIdName,allowInternational)=1010,1,Sunny Real Estate Investments,Y") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:4] MacroIf("SIP/sip2999_srei-00000051", "0?nointernational,0114402076015205") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:5] Gosub("SIP/sip2999_srei-00000051", "va_international_pin,s,1") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:1] Verbose("SIP/sip2999_srei-00000051", "2,Checking international pin") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_verbose.c:   == Checking international pin
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:2] Set("SIP/sip2999_srei-00000051", "ARRAY(internationalPin,sunday,monday,tuesday,wednesday,thursday,friday,saturday,timezone,internationalPinTimeout)=0517,*,*,*,*,*,*,*,0") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:3] GotoIfTime("SIP/sip2999_srei-00000051", "*,sun,*,*,0?check_pin") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:4] GotoIfTime("SIP/sip2999_srei-00000051", "*,sun,*,*,0?outside_tf") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:5] GotoIfTime("SIP/sip2999_srei-00000051", "*,mon,*,*,0?check_pin") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:6] GotoIfTime("SIP/sip2999_srei-00000051", "*,mon,*,*,0?outside_tf") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:7] GotoIfTime("SIP/sip2999_srei-00000051", "*,tue,*,*,0?check_pin") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:8] GotoIfTime("SIP/sip2999_srei-00000051", "*,tue,*,*,0?outside_tf") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:9] GotoIfTime("SIP/sip2999_srei-00000051", "*,wed,*,*,0?check_pin") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:10] GotoIfTime("SIP/sip2999_srei-00000051", "*,wed,*,*,0?outside_tf") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:11] GotoIfTime("SIP/sip2999_srei-00000051", "*,thu,*,*,0?check_pin") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:12] GotoIfTime("SIP/sip2999_srei-00000051", "*,thu,*,*,0?outside_tf") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:13] GotoIfTime("SIP/sip2999_srei-00000051", "*,fri,*,*,0?check_pin") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Goto (va_international_pin,s,18)
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:18] Set("SIP/sip2999_srei-00000051", "PEERNAME=sip2999_srei") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:19] GotoIf("SIP/sip2999_srei-00000051", "0?allow") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:20] Set("SIP/sip2999_srei-00000051", "pin_timestamp=1454093921") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:21] GotoIf("SIP/sip2999_srei-00000051", "0?allow") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:22] Read("SIP/sip2999_srei-00000051", "tempInternationalPin,coredial/please_enter_pin,4") in new stack
+[Jan 29 13:58:51] VERBOSE[12735] app_read.c:     -- Accepting a maximum of 4 digits.
+[Jan 29 13:58:52] VERBOSE[12735] file.c:     -- <SIP/sip2999_srei-00000051> Playing 'coredial/please_enter_pin.slin' (language 'en')
+[Jan 29 13:58:59] VERBOSE[12735] app_read.c:     -- User entered '0517'
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:23] GotoIf("SIP/sip2999_srei-00000051", "1?allow") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (va_international_pin,s,26)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:26] Set("SIP/sip2999_srei-00000051", "DB(srei_pin/sip2999_srei_172.16.128.89)=1454093939") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@va_international_pin:27] Return("SIP/sip2999_srei-00000051", "") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:6] GotoIf("SIP/sip2999_srei-00000051", "0?doFax") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:7] Set("SIP/sip2999_srei-00000051", "maxPaths=1010") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:8] Goto("SIP/sip2999_srei-00000051", "doneMaxPaths") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (macro-international_check,s,11)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:11] Macro("SIP/sip2999_srei-00000051", "va_record_call,5,2,2999") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-va_record_call:1] Verbose("SIP/sip2999_srei-00000051", "2,Checking if we should record this call") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] app_verbose.c:   == Checking if we should record this call
+[Jan 29 13:58:59] VERBOSE[12735] func_odbc.c:        > Found no rows [SELECT recordingQuota, displayFrom, displayTo, displayExt, displayQueue, displayAgent, displayUID, enableTime, sunday, monday, tuesday, wednesday, thursday, friday, saturday FROM recordCall WHERE pbxId=5 AND typeId=2 AND id='2999']
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-va_record_call:2] Set("SIP/sip2999_srei-00000051", "ARRAY(recordingQuota,displayFrom,displayTo,displayExt,displayQueue,displayAgent,displayUID,enableTime,sunday,monday,tuesday,wednesday,thursday,friday,saturday,timezone)=") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-va_record_call:3] GosubIf("SIP/sip2999_srei-00000051", "1?no-record,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [no-record@macro-va_record_call:1] Verbose("SIP/sip2999_srei-00000051", "2,Don't have to  record the call...") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] app_verbose.c:   == Don't have to  record the call...
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [no-record@macro-va_record_call:2] MacroExit("SIP/sip2999_srei-00000051", "") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:12] Set("SIP/sip2999_srei-00000051", "__SOURCE_EXTEN=2999") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:13] Set("SIP/sip2999_srei-00000051", "__SOURCE_CONTEXT=srei") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-international_check:14] Macro("SIP/sip2999_srei-00000051", "coredial,0114402076015205,90,,srei,1010,,,Sunny Real Estate Investments,,Y,") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-coredial:1] GotoIf("SIP/sip2999_srei-00000051", "0?customid,1:peertableid,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (macro-coredial,peertableid,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [peertableid@macro-coredial:1] NoOp("SIP/sip2999_srei-00000051", "") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [peertableid@macro-coredial:2] ExecIf("SIP/sip2999_srei-00000051", "0?Set(PEERNAME=sip2999_srei)") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [peertableid@macro-coredial:3] Set("SIP/sip2999_srei-00000051", "outCID=3475552116") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [peertableid@macro-coredial:4] GotoIf("SIP/sip2999_srei-00000051", "0?blank,1:cid,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (macro-coredial,cid,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [cid@macro-coredial:1] GotoIf("SIP/sip2999_srei-00000051", "0?privacy,1:checkcid,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (macro-coredial,checkcid,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [checkcid@macro-coredial:1] GotoIf("SIP/sip2999_srei-00000051", "10?setup,1:fixcid,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (macro-coredial,setup,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:1] Set("SIP/sip2999_srei-00000051", "CALLERID(number)=3475552116") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:2] Set("SIP/sip2999_srei-00000051", "CALLERID(ani)=3475552116") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:3] ExecIf("SIP/sip2999_srei-00000051", "1?Set(ARRAY(outboundCnam)=Sunny Real Esta)") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:4] Set("SIP/sip2999_srei-00000051", "CALLERID(name)=Sunny Real Esta") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:5] Set("SIP/sip2999_srei-00000051", "DIALTHIS=0114402076015205") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:6] Set("SIP/sip2999_srei-00000051", "RINGSECS=90") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:7] Set("SIP/sip2999_srei-00000051", "RINGARGS=") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:8] Set("SIP/sip2999_srei-00000051", "PATHNAME=srei") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:9] Set("SIP/sip2999_srei-00000051", "MAXPATH=1010") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:10] Set("SIP/sip2999_srei-00000051", "INTL=Y") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:11] Set("SIP/sip2999_srei-00000051", "TIMEOUT(absolute)=25200") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] func_timeout.c: Channel will hangup at 2016-01-29 20:58:59.723 EST.
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:12] Set("SIP/sip2999_srei-00000051", "PORTAL_FORWARDED=0") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:13] Set("SIP/sip2999_srei-00000051", "PORTAL_FINDME=0") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [setup@macro-coredial:14] Goto("SIP/sip2999_srei-00000051", "pathcheck,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (macro-coredial,pathcheck,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [pathcheck@macro-coredial:1] Macro("SIP/sip2999_srei-00000051", "pathvalidate,srei,1010,outbound") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-pathvalidate:1] Verbose("SIP/sip2999_srei-00000051", "checking path count for srei") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] app_verbose.c: checking path count for srei
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-pathvalidate:2] Set("SIP/sip2999_srei-00000051", "optGroupName=") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-pathvalidate:3] Set("SIP/sip2999_srei-00000051", "groupName=srei") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-pathvalidate:4] Set("SIP/sip2999_srei-00000051", "GROUP()=srei") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-pathvalidate:5] NoOp("SIP/sip2999_srei-00000051", "srei COUNT:1 MAX:1010") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-pathvalidate:6] Set("SIP/sip2999_srei-00000051", "CDR(cd_pathcount)=1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@macro-pathvalidate:7] GotoIf("SIP/sip2999_srei-00000051", "0?outbound_path_exceeded,s,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [pathcheck@macro-coredial:2] Goto("SIP/sip2999_srei-00000051", "final,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (macro-coredial,final,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [final@macro-coredial:1] NoOp("SIP/sip2999_srei-00000051", " CID= : Exten=0114402076015205 ") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [final@macro-coredial:2] Goto("SIP/sip2999_srei-00000051", "international_Y,0114402076015205,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (international_Y,0114402076015205,1)
+[Jan 29 13:58:59] VERBOSE[12735] app_macro.c:   == Channel 'SIP/sip2999_srei-00000051' jumping out of macro 'coredial'
+[Jan 29 13:58:59] VERBOSE[12735] app_macro.c:   == Channel 'SIP/sip2999_srei-00000051' jumping out of macro 'international_check'
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@international_Y:1] Goto("SIP/sip2999_srei-00000051", "routeoutbound,0114402076015205,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (routeoutbound,0114402076015205,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@routeoutbound:1] Verbose("SIP/sip2999_srei-00000051", "2,OUTBOUND CALLTO 0114402076015205 accountcode=srei") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] app_verbose.c:   == OUTBOUND CALLTO 0114402076015205 accountcode=srei
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@routeoutbound:2] AGI("SIP/sip2999_srei-00000051", "gwlistr,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] res_agi.c:     -- Launched AGI Script /var/lib/asterisk/agi-bin/gwlistr
+[Jan 29 13:58:59] ERROR[12735] utils.c: write() returned error: Broken pipe
+[Jan 29 13:58:59] VERBOSE[12735] res_agi.c:     -- <SIP/sip2999_srei-00000051>AGI Script gwlistr completed, returning 0
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@routeoutbound:3] GotoIf("SIP/sip2999_srei-00000051", "1?get_agw,s,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (get_agw,s,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@get_agw:1] Verbose("SIP/sip2999_srei-00000051", "2,Locating available gateway") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] app_verbose.c:   == Locating available gateway
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@get_agw:2] GotoIf("SIP/sip2999_srei-00000051", "0?fail_call,s,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@get_agw:3] Verbose("SIP/sip2999_srei-00000051", "2,AGW_LIST=1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] app_verbose.c:   == AGW_LIST=1
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@get_agw:4] Set("SIP/sip2999_srei-00000051", "CUR_AGW=1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@get_agw:5] Set("SIP/sip2999_srei-00000051", "AGW_LIST=") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@get_agw:6] GotoIf("SIP/sip2999_srei-00000051", "0?dial_agw_findme,0114402076015205,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [s@get_agw:7] Goto("SIP/sip2999_srei-00000051", "dial_agw,0114402076015205,1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Goto (dial_agw,0114402076015205,1)
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@dial_agw:1] Verbose("SIP/sip2999_srei-00000051", "2,Trying gateway 1") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] app_verbose.c:   == Trying gateway 1
+[Jan 29 13:58:59] VERBOSE[12735] pbx.c:     -- Executing [0114402076015205@dial_agw:2] Dial("SIP/sip2999_srei-00000051", "SIP/0114402076015205@agw1,90,") in new stack
+[Jan 29 13:58:59] VERBOSE[12735] netsock2.c:   == Using SIP RTP CoS mark 5
+[Jan 29 13:58:59] VERBOSE[12735] app_dial.c:     -- Called SIP/0114402076015205@agw1
+[Jan 29 13:58:59] VERBOSE[12735] app_dial.c:     -- SIP/agw1-00000052 answered SIP/sip2999_srei-00000051
+[Jan 29 13:58:59] DEBUG[12735] channel.c: setting peeraccount to srei for SIP/agw1-00000052 from data on channel SIP/sip2999_srei-00000051
+[Jan 29 13:58:59] DEBUG[12735] channel.c: setting peeraccount to srei for SIP/sip2999_srei-00000051 from data on channel SIP/agw1-00000052
+[Jan 29 13:58:59] VERBOSE[12735] rtp_engine.c:     -- Locally bridging SIP/sip2999_srei-00000051 and SIP/agw1-00000052
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:00] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:01] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:02] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:03] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:03] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:03] WARNING[12735] res_rtp_asterisk.c: RTP Transmission error of packet to 172.16.128.89:0: Invalid argument
+[Jan 29 13:59:03] VERBOSE[12735] pbx.c:   == Spawn extension (dial_agw, 0114402076015205, 2) exited non-zero on 'SIP/sip2999_srei-00000051'

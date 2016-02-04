@@ -1,0 +1,5 @@
+SEQUENTIAL
+# field0 - SIP username for qa4-fs18 SIP user
+# field1 - username and password for qa4-fs18 SIP user
+# field2 - International number
+sip2999_srei;[authentication username=sip2999_srei password=56a250731544e];0114402076015205;

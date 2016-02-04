@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+
+This SIPp scenario does a:
+- REGISTER
+- waits for a 401(unauthorized)
+- RE-REGISTER with a username and password
+- INVITE
+- waits for a 401 or 407(unauthorized)
+- RE-INVITE with a username and password
+- enters a password(0517) via touchtone
+- waits a couple seconds
+- ends the call
+- runs the bin/findcallinasterisk program to get the call log for the call
+
+-->
+
+<scenario name="REGISTER + INVITE + TOUCHTONE + HANGUP">
+
+   <!-- ************************************************************* -->
+   <!-- Start, send REGISTER, resend with auth                        -->
+   <!-- ************************************************************* -->
+   
+   <send>
+      <![CDATA[
+
+         REGISTER sip:[field0]@[remote_ip] SIP/2.0
+         Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+         From: "SIPp"<sip:[field0]@[remote_ip]>;tag=[call_number]
+         To: "SIPp"<sip:[field0]@[remote_ip]>
+         Call-ID: [call_id]
+         CSeq: [cseq] REGISTER
+         Contact: <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
+         Max-Forwards: 10
+         Expires: 120
+         User-Agent: SIPp/Linux
+         Content-Length: 0
+
+     ]]>
+   </send>
+   
+   <recv response="100" optional="true">
+   </recv>
+
+   <recv response="401" auth="true">
+   </recv>
+
+   <send retrans="500">
+      <![CDATA[
+
+         REGISTER sip:[field0]@[remote_ip] SIP/2.0
+         Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+         From: "SIPp"<sip:[field0]@[remote_ip]>;tag=[call_number]
+         To: "SIPp"<sip:[field0]@[remote_ip]>
+         Call-ID: [call_id]
+         CSeq: [cseq] REGISTER
+         Contact: <sip:[field0]@[local_ip]:[local_port];transport=[transport]>
+         [field1]
+         Max-Forwards: 10
+         Expires: 120
+         User-Agent: SIPp/Linux
+         Content-Length: 0 
+
+     ]]>
+   </send>
+
+   <recv response="100" optional = "true">
+   </recv>
+
+   <recv response="200">
+   </recv>
+   
+   <!-- ************************************************************* -->
+   <!-- send INVITE, then resend with authentication                  -->
+   <!-- ************************************************************* -->
+
+   <send retrans="500">
+      <![CDATA[
+
+         INVITE sip:[field2]@[remote_ip] SIP/2.0
+         Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+         From: "SIPp" <sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag09[call_number]
+         To: <sip:[field2]@[remote_ip]:[local_port]>
+         Call-ID: [call_id]
+         CSeq: [cseq] INVITE
+         Contact: "SIPp" <sip:[field0]@[local_ip]:[local_port];ob>
+         Max-Forwards: 70
+         Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+         Supported: replaces, 100rel, timer, norefersub
+         Subject: Performance Test
+         Min-SE: 90
+         User-Agent: SIPp 3.9 
+         Content-Type: application/sdp
+         Content-Length: [len]
+   
+         v=0
+         o=- 53655765 2353687637 IN IP[local_ip_type] [local_ip]
+         s=testcall
+         c=IN IP[media_ip_type] [media_ip]
+         t=0 0
+         b=AS:84n
+         a=X-nat:0
+         m=audio 4000 RTP/AVP 103 102 104 109 3 0 8 9 101
+         b=TIAS:64000
+         a=rtcp:4001 IN IP[local_ip_type] [local_ip]
+         a=sendrecv
+         a=rtpmap:103 speex/16000
+         a=rtpmap:102 speex/8000
+         a=rtpmap:104 speex/32000
+         a=rtpmap:109 iLBC/8000
+         a=fmtp:109 mode=30
+         a=rtpmap:3 GSM/8000
+         a=rtpmap:0 PCMU/8000
+         a=rtpmap:8 PCMA/8000
+         a=rtpmap:9 G722/8000
+         a=rtpmap:101 telephone-event/8000
+         a=fmtp:101 0-15
+
+      ]]>
+   </send>
+   
+   <!-- some asterisk servers reply 401 for unauthorized, others reply 407 -->
+   
+   <recv response="401" auth="true" optional="true" next="1">
+   </recv>
+
+   <recv response="407" auth="true">
+   </recv>
+
+   <label id="1"/>
+
+   <send retrans="500">
+      <![CDATA[
+         
+         INVITE sip:[field2]@[remote_ip] SIP/2.0
+         Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+         From: "SIPp" <sip:[field0]@[remote_ip]>;tag=[pid]SIPpTag09[call_number]
+         To: <sip:[field2]@[remote_ip]>
+         Call-ID: [call_id]
+         CSeq: [cseq] INVITE
+         Contact: "SIPp" <sip:[field0]@[local_ip]:[local_port]>
+         [field1]
+         Allow: PRACK, INVITE, ACK, BYE, CANCEL, UPDATE, INFO, SUBSCRIBE, NOTIFY, REFER, MESSAGE, OPTIONS
+         Supported: replaces, 100rel, timer, norefersub
+         Subject: Performance Test
+         Min-SE: 90
+         User-Agent: SIPp 3.9
+         Max-Forwards: 70
+         Subject: Performance Test
+         Content-Type: application/sdp
+         Content-Length: [len]
+
+         v=0
+         o=- 53655765 2353687637 IN IP[local_ip_type] [local_ip]
+         s=testcall
+         c=IN IP[media_ip_type] [media_ip]
+         t=0 0
+         b=AS:84n
+         a=X-nat:0
+         m=audio 4000 RTP/AVP 103 102 104 109 3 0 8 9 101
+         b=TIAS:64000
+         a=rtcp:4001 IN IP[local_ip_type] [local_ip]
+         a=sendrecv
+         a=rtpmap:103 speex/16000
+         a=rtpmap:102 speex/8000
+         a=rtpmap:104 speex/32000
+         a=rtpmap:109 iLBC/8000
+         a=fmtp:109 mode=30
+         a=rtpmap:3 GSM/8000
+         a=rtpmap:0 PCMU/8000
+         a=rtpmap:8 PCMA/8000
+         a=rtpmap:9 G722/8000
+         a=rtpmap:101 telephone-event/8000
+         a=fmtp:101 0-15
+
+      ]]>
+   </send>
+
+   <recv response="100" optional="true">
+   </recv>
+
+   <recv response="180" optional="true">
+   </recv>
+
+   <recv response="183" optional="true">
+   </recv>
+
+   <recv response="200">
+   </recv>
+   
+   <!-- ************************************************************* -->
+   <!-- send ACK                                                      -->
+   <!-- ************************************************************* -->
+
+   <!-- ACK the RTP connection so asterisk does not boot us from the call -->
+   
+   <send>
+      <![CDATA[
+
+         ACK sip:[field2]@[remote_ip] SIP/2.0
+         Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+         From: "SIPp"<sip:[field0]@[remote_ip]>;tag=[call_number]
+         To: <sip:[field2]@[remote_ip]>
+         Call-ID: [call_id]
+         CSeq: [cseq] ACK
+         User-Agent: SIPp/Linux
+         Content-Length: 0
+
+     ]]>
+   </send>
+   
+   <pause milliseconds="5000" />
+   
+   
+   <!-- Enter password 0517 -->
+   
+   <nop>
+     <action>
+       <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
+     </action>
+   </nop>
+
+   <pause milliseconds="1000"/>
+   
+   <nop>
+     <action>
+       <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
+     </action>
+   </nop>
+   
+   <pause milliseconds="1000"/>
+   
+   <nop>
+     <action>
+       <exec play_pcap_audio="pcap/dtmf_2833_1.pcap"/>
+     </action>
+   </nop>
+   
+   <pause milliseconds="1000"/>
+   
+   <nop>
+     <action>
+       <exec play_pcap_audio="pcap/dtmf_2833_7.pcap"/>
+     </action>
+   </nop>
+      
+   <pause milliseconds="3500"/>
+
+   <!-- ************************************************************* -->
+   <!-- send ACK                                                      -->
+   <!-- ************************************************************* -->
+   
+   <send>
+      <![CDATA[
+
+         BYE sip:[field2]@[remote_ip] SIP/2.0
+         Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
+         From: "SIPp"<sip:[field0]@[remote_ip]>;tag=[call_number]
+         To: <sip:[field2]@[remote_ip]>
+         Call-ID: [call_id]
+         CSeq: [cseq] BYE
+         User-Agent: SIPp/Linux
+         Content-Length: 0
+
+     ]]>
+   </send>
+
+   <!-- some asterisk servers send 200 for their BYE response, others send 487  -->
+
+   <recv response="487" optional="true">
+   </recv>
+
+   <recv response="200" >
+   </recv>
+
+   <!-- Write the call log to a file -->
+   <nop>
+     <action>
+       <exec command="bin/findcallinasterisk [field3] [field4] [field5] > [field6]" />
+     </action>
+   </nop>
+
+</scenario>

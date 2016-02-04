@@ -1,1 +1,3 @@
 sipp-*/
+*.log
+*.py[oc]

@@ -3,15 +3,32 @@
 
 This SIPp scenario does a:
 - INVITE
-- 10 second pause
+- 15 second pause
+- press 0
+- 15 second pause 
+- press 5
+- 15 second pause 
+- press 5
+- 15 second pause
+- press 0
+- 15 second pause
+- press 0
+- 15 second pause 
+- press 5
+- 15 second pause 
+- press 5
+- 15 second pause
+- press 0
+- 15 second pause
+- press 0
 - ends the call
 
 -->
 
-<scenario name="INVITE + HANGUP">
+<scenario name="INVITE + LOOP AUTO ATTENDANT + HANGUP">
    
    <!-- ************************************************************* -->
-   <!-- send INVITE -->
+   <!-- send INVITE                                                   -->
    <!-- ************************************************************* -->
 
    <send retrans="500">
@@ -72,9 +89,13 @@ This SIPp scenario does a:
 
    <recv response="200">
    </recv>
+
    
-    <!-- ACK the RTP connection so asterisk does not boot us from the call -->
-   
+   <!-- ************************************************************* -->
+   <!-- send ACK                                                      -->
+   <!-- ************************************************************* -->
+
+   <!-- ACK the RTP connection so asterisk does not boot us from the call -->
    <send>
       <![CDATA[
 
@@ -89,9 +110,83 @@ This SIPp scenario does a:
 
      ]]>
    </send>
-   
+
+   <!-- Alternate pressing 0 and pressing 5 because Asterisk ignores the third consecutive press of the same number -->
+
    <pause milliseconds="15000" />  
     
+   <!-- Press 0 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
+   <!-- Press 5 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
+   <!-- Press 5 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
+   <!-- Press 0 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
+   <!-- Press 0 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
+   <!-- Press 5 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
+   <!-- Press 5 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
+   <!-- Press 0 -->
+   <nop>
+      <action>
+         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
+      </action>
+   </nop>
+   
+   <pause milliseconds="15000" />
+   
    <!-- Press 0-->
    <nop>
       <action>
@@ -99,79 +194,13 @@ This SIPp scenario does a:
       </action>
    </nop>
    
-   <pause milliseconds="15000" />
-   
- <!-- Press 0 -->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" />
-   
-      <!-- Press 0-->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" />
-   
-         <!-- Press 0-->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" />
-   
-         <!-- Press 0-->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" />
-   
-   <!-- Press 0-->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" />
-   
-      <!-- Press 0-->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_5.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" />
-   
-         <!-- Press 0-->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" />
-   
-         <!-- Press 0-->
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/dtmf_2833_0.pcap"/>
-      </action>
-   </nop>
-   
-   <pause milliseconds="15000" /> -->   
+   <pause milliseconds="15000" /> 
+
+
+   <!-- ************************************************************* -->
+   <!-- send BYE                                                      -->
+   <!-- ************************************************************* -->
+
    <send>
       <![CDATA[
 

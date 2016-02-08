@@ -3,8 +3,9 @@
 
 This SIPp scenario does a:
 - INVITE
+- 10 second pause
 - sends a signal to simulate pressing the 4 key
-- plays a pcap file for 150 seconds
+- 15 second pause
 - ends the call
 
 -->
@@ -99,18 +100,8 @@ This SIPp scenario does a:
          <exec play_pcap_audio="pcap/dtmf_2833_4.pcap"/>
       </action>
    </nop>
-
-   <pause milliseconds="1000"/>
    
-   <pause milliseconds="20000" />
-
-   <nop>
-      <action>
-         <exec play_pcap_audio="pcap/hey_ya.pcap"/>
-      </action>
-   </nop>   
-   
-   <pause milliseconds="160000" />
+   <pause milliseconds="15000" />
    
    
    <send>

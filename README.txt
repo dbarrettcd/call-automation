@@ -71,6 +71,11 @@ Expected test time: 17.5 minutes
 
 Inbound Holiday
 ---------------
+Web requirements:
+1. Set the Phone Number to route to If Holiday - Mailbox 999 
+2. Set today as a holiday
+3. Set the path count of the customer to 1000
+
 Functional: 
 
 sipp-3.3.990/sipp qa4-fs18.dev.coredial.com -sf inbound/holiday/functional/inbound_holiday_direct.xml -inf inbound/holiday/functional/from_sipp_to_qa4-fs18_holiday.csv -aa -i 172.16.128.89 -nostdin -m 1 
@@ -79,11 +84,20 @@ bin/assertsuccess.py inbound/holiday/functional/inbound_holiday_voicemail_new.tx
 
 Load: 
 
-sipp-3.3.990/sipp qa4-fs18.dev.coredial.com -sf inbound/holiday/load/inbound_holiday_direct.xml -inf inbound/holiday/load/from_sipp_to_qa4-fs18_holiday.csv -aa -i 172.16.128.89 -nostdin -r 13 -m 11700
+sipp-3.3.990/sipp qa4-fs18.dev.coredial.com -sf inbound/holiday/load/inbound_holiday_direct.xml -inf inbound/holiday/load/from_sipp_to_qa4-fs18_holiday.csv -aa -i 172.16.128.89 -nostdin -r 25 -m 22500
+
+Load Statistics
+Concurrent calls: 250
+Each call duration: 10 seconds
+Expected test time: 15 minutes
 
 
 Inbound Time Frame
 ------------------
+Web requirements:
+1. Set button 4 of Auto Attendant - Main to route to Auto Attendant - Main
+2. Set the DID to route to Auto Attendant - Main
+3. Set the path count of the customer to 1000
 
 Functional:
 
@@ -93,10 +107,18 @@ Load:
 
 sipp-3.3.990/sipp qa4-fs18.dev.coredial.com -sf inbound/time_frame/load/inbound_time_frame_direct.xml -inf inbound/time_frame/load/from_sipp_to_qa4-fs18_time_frame.csv -aa -i 172.16.128.89 -nostdin -r 5 -m 9000 
 
+Load Statistics
+Concurrent calls: 250
+Each call duration: 25 seconds
+Expected test time: 15.5 minutes
 
 
 Outbound International
 ----------------------
+Web requirements:
+1. Create an extension with credentials - username=sip2999_srei password=56a250731544e
+2. Allow international calling for the customer - remember pin for 0 minutes
+3. Make the PIN 0517
 
 Functional:
 
@@ -110,7 +132,7 @@ sipp-3.3.990/sipp qa4-fs18.dev.coredial.com -sf outbound/international/load/outb
 
 Load Statistics
 Concurrent calls: 150
-Each call duration: 10 seconds
+Each call duration: 11 seconds
 Expected test time: 15 minutes
 
 

@@ -1,0 +1,4 @@
+local_ip = 172.16.128.89
+feature_server = qa4-dev.coredial.com
+phone_number = 6178302175
+

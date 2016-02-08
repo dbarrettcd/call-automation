@@ -1,9 +1,0 @@
-SEQUENTIAL
-# field0 - SIP username for uat-fs18 SIP user
-# field1 - username and password for uat-fs18 SIP user
-# field2 - DID for QA4
-# field3 - fs18 server credentials
-# field4 - ssh key for fs18
-# field5 - asterisk log
-# field6 - location of file output
-sip2999_srei;[authentication username=sip2999_srei password=5693d29da6b44];6178302175;vagrant@qa4-fs18.dev.coredial.com;ssh/vagrant_key;/var/log/asterisk/full;inbound/auto_attendant/functional/inbound_auto_attendant_voicemail_new.txt;
